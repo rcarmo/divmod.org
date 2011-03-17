@@ -1,0 +1,30 @@
+<nevow:invisible nevow:pattern="navigation" xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+  <div class="tdb-navigation-panel">
+    <a style="display: none;" class="first-page" href="#" onclick="return Mantissa.TDB.Controller.get(this).firstPage();">
+      <img src="/Mantissa/images/first.png" border="0" />
+    </a>
+    <img class="first-page-disabled" src="/Mantissa/images/first_disabled.png" border="0" />
+
+    <a style="display: none;" class="prev-page" href="#" onclick="return Mantissa.TDB.Controller.get(this).prevPage();">
+      <img src="/Mantissa/images/prev.png" border="0" />
+    </a>
+    <img class="prev-page-disabled" src="/Mantissa/images/prev_disabled.png" border="0" />
+
+    <a style="display: none;" class="next-page" href="#" onclick="return Mantissa.TDB.Controller.get(this).nextPage();">
+      <img src="/Mantissa/images/next.png" border="0" />
+    </a>
+    <img class="next-page-disabled" src="/Mantissa/images/next_disabled.png" border="0" />
+
+    <a style="display: none;" class="last-page" href="#" onclick="return Mantissa.TDB.Controller.get(this).lastPage()">
+      <img src="/Mantissa/images/last.png" border="0" />
+    </a>
+    <img class="last-page-disabled" src="/Mantissa/images/last_disabled.png" border="0" />
+
+    <img style="visibility: hidden;" class="throbber" src="/Mantissa/images/circle-throbber.gif" />
+  </div>
+  <div class="tdb-action-result" />
+  <div class="tdb-control-panel" style="display: none">
+    viewing items <span class="tdb-item-start" /> to
+    <span class="tdb-item-end" /> out of <span class="tdb-total-items" />
+  </div>
+</nevow:invisible>

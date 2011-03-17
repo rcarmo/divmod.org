@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><title>Site Root Plugins</title></head>
+  <body>
+    <h1>Site Root Plugins</h1>
+    <h2>Prerequisites</h2>
+    <p>
+      In order to understand how resource lookup works in Mantissa, you will
+      already need to understand:
+    </p>
+    <ul>
+      <li>Resource lookup in Nevow</li>
+      <li>Rendering content in Nevow</li>
+      <li>Axiom powerups</li>
+      <li>Zope Interface, adaptation using interfaces, and the Twisted
+      <code>registerAdapter</code> function.</li>
+      <li>Mantissa <q>site</q> and <q>user</q> stores</li>
+    </ul>
+    <h2>Introduction</h2>
+    <p>
+      In order to present information to the user via the web, Mantissa
+      applications define <em>models</em>, which are <code>Item</code>s in an
+      Axiom store, and web <em>views</em>, which are Nevow
+      <code>Element</code>s.
+    </p>
+    <!--
+        There should be a link here to the high-level API documentation when we
+        write some of that.  See ticket #2707 for work on the new high-level
+        API.
+    -->
+    <p>
+      This document will explore how Mantissa uses an URL to find a model and
+      hook it up to a view, and how you can write plugins to customize that
+      process.  This type of plugin can be helpful to applications which want
+      to present custom URL hierarchies which are outside of the usual
+      locations of <code>/private</code>, <code>/users</code>, and
+      <code>/static</code>.
+    </p>
+    <h2>A Simple Example</h2>
+    <p>
+      Let's say that you are replacing an old, PHP-based website with a new
+      Mantissa one.  Lots of people link to your old URLs, so you want them to
+      continue to work.  Two of your old URLs look like this:
+    </p>
+    <ul>
+      <li>
+        <code>http://example.com/about.php</code> - this URL used to be a
+        mostly static description of your site.  The only dynamic component was
+        the site navigation.
+      </li>
+      <li>
+        <code>http://example.com/admin.php</code> - this URL used to be an
+        administrative configuration panel, only accessible to the
+        administrator user.  And of course, it was only accessible to them when
+        they're logged in!
+      </li>
+    </ul>
+    <p>
+      In order to serve new versions of these pages at the same URLs, we'll
+      need to implement the <code>ISiteRootPlugin</code> interface from
+      Mantissa, as well as install our implementation as a powerup on both site
+      and user stores.
+    </p>
+    <h3>Resources for Everyone</h3>
+    <p>
+      Everyone should be able to view <code>/about.php</code>.  In order to
+      display something that looks nice, we need an implementation of
+      <code>ISiteRootPlugin</code> that constructs a
+      <code>INavigableFragment</code> and wraps it in a shell page.
+      <!-- See above about #2707. This should be changed to some other
+           interface; possibly simply IRenderable. -->
+    </p>
+    <a href="listings/siteroot/aboutpage.py" class="py-listing">
+      An implementation of the text on the 'about' page and a plugin which
+      displays it.
+    </a>
+    <p>
+      In this example, we define an <code>AboutText</code> element which
+      renders a simple string, and an <code>AboutPlugin</code> that can plug in
+      to a Mantissa site.  It implements the <code>produceResource</code>
+      method of <code>ISiteRootPlugin</code>, which must return a tuple of an
+      <code>IResource</code> provider and tuple of child segments, similar to
+      Nevow's <code>IResource.locateChild</code> method.
+    </p>
+    <p>
+      The <code>AboutText</code> element is a fragment, not a resource.  We
+      want to wrap it in a shell page appropriate to the viewing user, with
+      their navigation, theme, and so on.  That's what the <code>viewer</code>
+      argument is for; it is an <code>IWebViewer</code> that you can use, among
+      other things, to wrap something adaptable to
+      <code>INavigableFragment</code> in a shell page.  In this case our
+      'model' is actually a view that is already an
+      <code>INavigableFragment</code>, but you can wrap anything with an
+      appropriate adapter using this method.
+    </p>
+    <p>
+      This text is something that we want to be visible to everyone, so we want
+      to add it to a Mantissa site store.  Let's create one:
+    </p>
+<pre class="shell">
+$ axiomatic mantissa
+Use database 'mantissa.axiom'? (Y/n) y
+Enter Divmod™ Mantissa™ password for 'admin@localhost': 
+Confirm Divmod™ Mantissa™ password for 'admin@localhost': 
+</pre>
+    <p>
+      Normally, to add something to a store like this, you'd want to create an
+      offering and allow an administrator to install it.  For the simplicity of
+      this example, though, we'll just install the plugin directly from a
+      command prompt:
+    </p>
+<pre class="shell">
+$ axiomatic -d mantissa.axiom browse
+[axiom, version 0.5.28+r16643].  Autocommit is off.
+&gt;&gt;&gt; import aboutpage
+&gt;&gt;&gt; p = aboutpage.AboutPlugin(store=db)
+&gt;&gt;&gt; db.powerUp(p)
+&gt;&gt;&gt; ^D
+</pre>
+    <p>
+      Now that we've installed it, let's get the server started.
+    </p>
+<pre>
+$ axiomatic start -n
+Use database 'mantissa.axiom'? (Y/n) y
+2008-09-05 17:18:08-0400 [-] Log opened.
+2008-09-05 17:18:08-0400 [-] twistd 8.1.0+r24685 (/usr/bin/python 2.5.1) starting up.
+...
+</pre>
+    <p>
+      As usual, on http://localhost:8080/ you'll see a Mantissa server.  But
+      now, if you hit http://localhost:8080/about.php, you should see the
+      message text from your <code>AboutText</code> object.
+    </p>
+    <h3>Customized Per-User Plugins</h3>
+    <p>
+      Now we can do something similar for the administrator.  What used to be
+      under <code>admin.php</code> is now under <code>/private</code>.  We can
+      create a site root plugin that will redirect the administrator to the new
+      page, then install it only on the administrative user's store.
+    </p>
+    <a href="listings/siteroot/adminpage.py" class="py-listing">
+      An implementation of a plugin which can issue a redirect from one URL to
+      another.
+    </a>
+    <p>
+      In order to install this powerup for the administrator, we have to find
+      their database, import the object, and install it.  Normally, we would
+      install a powerup via a product or signup mechanism, but for simplicity
+      we'll install it directly.  First hit control-C to stop the server, then:
+    </p>
+<pre>
+$ cd mantissa.axiom/files/account/localhost/
+$ ls
+admin.axiom
+$ axiomatic -d admin.axiom browse
+[axiom, version 0.5.28+r16643].  Autocommit is off.
+&gt;&gt;&gt; import adminpage
+&gt;&gt;&gt; p = adminpage.RedirectPlugin(store=db)
+&gt;&gt;&gt; db.powerUp(p)
+&gt;&gt;&gt; ^D
+$ cd ../../../../
+</pre>
+    <p>
+      Now, if you start the server up again (the same "axiomatic start" as
+      above), you can see in your browser that http://localhost:8080/admin.php
+      is an error: there's no page there.  Click the 'log in' link on the front
+      page, however, and you will see that "admin.php" takes you straight to
+      /private.
+    </p>
+    <h2>Congratulations!</h2>
+    <p>
+      You now know how to customize a Mantissa server to respond to arbitrary
+      URLs!
+    </p>
+  </body>
+</html>

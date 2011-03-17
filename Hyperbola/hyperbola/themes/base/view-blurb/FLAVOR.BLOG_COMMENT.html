@@ -1,0 +1,14 @@
+<li xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveElement"
+  class="hyperbola-blurb hyperbola-blog-comment">
+  <div class="hyperbola-blurb-body">
+    <div class="hyperbola-blurb-author" style="display: none">
+      <span class="hyperbola-blurb-author-name"
+        ><nevow:invisible nevow:render="author" /></span> wrote:
+    </div>
+    <nevow:invisible nevow:render="body" />
+    <div class="hyperbola-comment-date">
+      Posted on <nevow:invisible nevow:render="dateCreated" />
+    </div>
+  </div>
+</li>

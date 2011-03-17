@@ -1,0 +1,65 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  nevow:render="liveElement"
+  class="hyperbola-blurb hyperbola-blog-post hyperbola-blog-post-detail">
+
+  <div class="hyperbola-blog-title">
+    <div class="hyperbola-blog-main-title"><nevow:invisible nevow:render="blogTitle" /></div>
+    <div class="hyperbola-blog-sub-title"><nevow:invisible nevow:render="blogBody" /></div>
+  </div>
+
+  <div class="hyperbola-blog-post-title">
+    <div class="hyperbola-blog-post-date">
+      <nevow:invisible nevow:render="dateCreated" />
+    </div>
+    <a nevow:render="titleLink">
+      <nevow:attr name="href"><nevow:slot name="link" /></nevow:attr>
+      <nevow:slot name="title" />
+    </a>
+  </div>
+  <div class="hyperbola-blog-post-content">
+    <div class="hyperbola-blurb-body">
+      <nevow:invisible nevow:render="body" />
+    </div>
+  </div>
+
+  <nevow:invisible nevow:pattern="tag-separator">, </nevow:invisible>
+
+    <a href="#" class="tag" nevow:pattern="tag"
+      onclick="return Nevow.Athena.Widget.get(this).widgetParent.chooseTag(this);"><nevow:slot name="name" /></a>
+
+    <a href="#" class="selected-tag" nevow:pattern="selected-tag"
+      onclick="return Nevow.Athena.Widget.get(this).widgetParent.unchooseTag(this);"><nevow:slot name="name" /></a>
+
+  <div class="hyperbola-blog-post-links">
+    Filed under: <nevow:invisible nevow:render="tags" />
+    <nevow:invisible nevow:render="editLink">
+      | <a href="#" onclick="return Nevow.Athena.Widget.get(this).toggleEditForm()">Edit</a>
+    </nevow:invisible>
+    <nevow:invisible nevow:render="deleteLink">
+      |
+      <a href="#">
+        <athena:handler event="onclick" handler="deletePost" />
+        Delete
+      </a>
+    </nevow:invisible>
+  </div>
+
+  <div class="hyperbola-blog-post-comments">
+    <div class="hyperbola-blog-post-comments-header">
+      Comments (<nevow:invisible nevow:render="childCount" />) left to
+      "<nevow:invisible nevow:render="title" />"
+    </div>
+    <ol>
+      <nevow:invisible nevow:render="view">
+        <div class="hyperbola-no-child-blurbs" nevow:pattern="no-child-blurbs">
+          No <nevow:slot name="child-type-name" />s
+        </div>
+      </nevow:invisible>
+    </ol>
+    <nevow:invisible nevow:render="addComment" />
+
+  </div>
+
+  <nevow:invisible nevow:render="editor" />
+</div>

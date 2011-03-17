@@ -1,0 +1,196 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  nevow:render="liveElement"
+  class="complexity-3-inbox">
+
+  <div class="loading">
+    Loading...
+  </div>
+
+  <div style="position: static" class="widget-container" />
+
+  <div nevow:pattern="last-message" class="last-message">
+    This is the last message
+  </div>
+  <div nevow:pattern="next-message" class="next-message">
+    <b class="next">Next:</b> <nevow:slot name="sender" /> - <i><nevow:slot name="subject" /></i>
+  </div>
+
+  <div nevow:pattern="accountChooser">
+    <div nevow:pattern="accountChoice" class="list-option">
+      <athena:handler event="onclick" handler="chooseAccountByNode" />
+      <span class="opt-name"><nevow:slot name="accountName" /></span></div>
+    <div nevow:pattern="selectedAccountChoice" class="selected-list-option"
+      ><span class="opt-name"><nevow:slot name="accountName" /></span></div>
+  </div>
+
+  <div nevow:pattern="tagChooser" class="tag-chooser">
+    <div nevow:pattern="tagChoice" class="list-option">
+      <athena:handler event="onclick" handler="chooseTagByNode" />
+      <span class="opt-name"><nevow:slot name="tagName" /></span></div>
+    <div nevow:pattern="selectedTagChoice" class="selected-list-option"
+      ><span class="opt-name"><nevow:slot name="tagName" /></span></div>
+  </div>
+
+  <div nevow:pattern="personChooser" class="person-chooser">
+    <div nevow:pattern="personChoice" class="list-option">
+      <athena:handler event="onclick" handler="choosePersonByNode" />
+      <span class="opt-name"><nevow:slot name="personName" /></span>
+      <span style="display: none" class="person-key"
+        ><nevow:slot name="personKey" /></span></div>
+    <div nevow:pattern="selectedPersonChoice" class="selected-list-option"
+      ><span class="opt-name"><nevow:slot name="personName" /></span>
+      <span style="display: none" class="person-key"
+        ><nevow:slot name="personKey" /></span></div>
+  </div>
+
+  <div nevow:pattern="mailViewChooser" class="view-chooser">
+    <div nevow:pattern="mailViewChoice" class="list-option">
+      <athena:handler event="onclick" handler="chooseMailViewByNode" />
+      <span class="opt-name"><nevow:slot name="mailViewName" /></span>
+      (<span class="count"><nevow:slot name="count" /></span>)</div>
+    <div nevow:pattern="selectedMailViewChoice" class="selected-list-option"
+      ><span class="opt-name"><nevow:slot name="mailViewName" /></span>
+      (<span class="count"><nevow:slot name="count" /></span>)</div>
+  </div>
+
+  <div class="pane-body" nevow:pattern="pane-body"
+    style="position: absolute; top: -1000px; left: -1000px;">
+    <nevow:slot name="renderer" />
+  </div>
+
+  <div class="pane-body" nevow:pattern="open-pane-body"
+    style="top: -1000px; left: -1000px;">
+    <nevow:slot name="renderer" />
+  </div>
+
+  <div nevow:pattern="view-pane" class="view-pane-content">
+    <div class="views-collapsible-pane"
+      onclick="Quotient.Common.CollapsiblePane.toggle(this, 'views-'); return false">
+      <img class="collapse-arrow" src="/static/Quotient/images/views-outline-collapsed.png" />
+      <span class="view-pane-name"><nevow:slot name="name" /></span>
+    </div>
+    <nevow:slot name="pane-body" />
+  </div>
+
+  <div class="inbox-content">
+    <div class="quotient-menubar">
+      <div style="float: right" class="mailbox-status-container">
+        <img style="display: none" class="throbber" src="/static/Quotient/images/throbber-small.gif" />
+        <span class="mailbox-status" />
+      </div>
+      <div class="complexity-icons">
+        <img src="/static/Quotient/images/complexity-selector-3-unselected.png"
+            onclick="Quotient.Mailbox.Controller.get(this).setComplexity(3, this, true)"
+            class="complexity-icon">
+          <athena:handler event="onmouseover" handler="complexityHover" />
+          <athena:handler event="onmouseout" handler="complexityHover" />
+        </img>
+        <img src="/static/Quotient/images/complexity-selector-2-unselected.png"
+          onclick="Quotient.Mailbox.Controller.get(this).setComplexity(2, this, true)"
+          class="complexity-icon">
+          <athena:handler event="onmouseover" handler="complexityHover" />
+          <athena:handler event="onmouseout" handler="complexityHover" />
+        </img>
+        <img src="/static/Quotient/images/complexity-selector-1-selected.png"
+          onclick="Quotient.Mailbox.Controller.get(this).setComplexity(1, this, true)"
+          class="selected-complexity-icon">
+          <athena:handler event="onmouseover" handler="complexityHover" />
+          <athena:handler event="onmouseout" handler="complexityHover" />
+        </img>
+      </div>
+      <div class="menubar-separator" />
+      <select class="view-shortcut-container">
+        <athena:handler event="onchange" handler="chooseMailViewByShortcutNode" />
+        <option value="inbox">Inbox</option>
+        <option value="all">All</option>
+        <option value="focus">Focus</option>
+        <option value="archive">Archive</option>
+        <option value="deferred">Deferred</option>
+        <option value="draft">Draft</option>
+        <option value="outbox">Outbox</option>
+        <option value="bounce">Bounced</option>
+        <option value="sent">Sent</option>
+        <option value="spam">Spam</option>
+        <option value="trash">Trash</option>
+      </select>
+      <a href="#">
+        <athena:handler event="onclick" handler="dom_compose" />
+        <img src="/static/Quotient/images/pencil.png" border="0" style="margin-top: 2px" />
+        <span style="color: #0099CC; position: relative; top: -4px">
+          Compose
+        </span>
+      </a>
+      <div style="clear: both; font-size: 0px">&#160;</div>
+    </div>
+    <div class="content-table-container">
+      <nevow:invisible nevow:render="messageActions" />
+      <table style="height: 100%; width: 100%" cellpadding="0" cellspacing="0" class="content-table">
+        <tbody>
+          <tr valign="top">
+            <td class="view-pane-cell" style="display: none">
+              <div class="view-pane-container">
+                <div class="view-pane">
+                  <nevow:invisible nevow:render="viewPane" name="Mail" renderer="mailViewChooser" open="open" />
+                  <nevow:invisible nevow:render="viewPane" name="People" renderer="personChooser" />
+                  <nevow:invisible nevow:render="viewPane" name="Tags" renderer="tagChooser" />
+                  <nevow:invisible nevow:render="viewPane" name="Accounts" renderer="accountChooser" />
+                </div>
+              </div>
+            </td>
+            <td class="scrolltable-cell">
+              <div class="scrolltable-container" style="top: -1000px; left: -1000px">
+                <div style="position: absolute; z-index: 99; display: none" class="throbber">
+                  <img src="/static/Quotient/images/throbber.gif" />
+                </div>
+                <nevow:invisible nevow:render="scroller" />
+              </div>
+            </td>
+            <td class="message-detail-cell">
+              <div class="message-detail" />
+            </td>
+          </tr>
+          <tr>
+            <td class="left-block-footer" style="display: none">&#160;</td>
+            <td class="mid-block-footer" style="display: none">
+              <table align="center" cellpadding="0" cellspacing="0" style="padding: 0px 2px 0px 2px">
+                <tr>
+                  <td>
+                    <form name="batch-selection" style="display: inline">
+                      <select name="batch-type" class="group-action">
+                        <option value="all">All</option>
+                        <option value="none">None</option>
+                        <option value="read">Read</option>
+                        <option value="unread">Unread</option>
+                      </select>
+                    </form>
+                  </td>
+                  <td style="padding-left: 2px">
+                    <nevow:invisible nevow:render="button">
+                      <a href="#">
+                        <athena:handler event="onclick" handler="changeBatchSelectionByNode" />
+                        select
+                      </a>
+                    </nevow:invisible>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="right-block-footer">
+              <div class="masthead-content">
+                <div class="progress-meter">
+                  <div class="progress-bar" />
+                </div>
+                <div class="next-message-preview" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="corner-footer">
+        <div class="left-corner" />
+        <div class="right-corner" />
+      </div>
+    </div>
+  </div>
+</div>

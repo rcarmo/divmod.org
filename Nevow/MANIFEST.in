@@ -1,0 +1,24 @@
+include ChangeLog
+include LICENSE
+include zomne.c
+include formless/freeform-default.css
+include nevow/Canvas.swf
+include nevow/athena_private/*.png
+include debian/*
+recursive-include twisted *.py
+recursive-include nevow *.css *.js
+include bin/nevow-xmlgettext 
+graft doc
+recursive-include examples *.css *.gif *.html *.jpg *.js *.py *.png *.tac *.mo *.po *.pot *.xml *.sql *.xul
+include examples/i18n/update-l10n
+include examples/files/words
+include examples/pastebin/data
+include examples/pastebin/static/robots.txt
+include examples/pastebin/TODO
+include examples/wsgi/README
+include extras/xhtml-nevow.rnc
+include nevow/Canvas.fla
+include nevow/canvas.as
+include win32/*
+prune */.svn 
+prune doc/html/*.html

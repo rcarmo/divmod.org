@@ -1,0 +1,114 @@
+<etrepum> I didn't run into any particular problems with bsddb
+%
+<glyph> Hooray for sanity!
+<moshez> roor sanity
+* moshez prefers the ACS way of thinking, which is completely different :)
+<glyph> moshez: completely different from sanity, you mean?  yes, the tcl clued me in.
+%
+<glyph> fzZzy: man, "nevow woven" sounds like "helter skelter" or something
+* glyph puts on a record
+%
+<dmcvs> Commit from amir (removed 1, added 2, changed 4) in 2 subdirs of Quotient/quotient: "rename and test" searchup.py, components.csv, taglib.py, tap2.py, indexup.py, test_searchup.py, test_throughput.py
+<glyph> amiramir: awesome
+<amiramir> buildbot did not think so
+%
+<fzZzy> haha I guess exposing /tmp over http might be a bad idea
+%
+* fzZzy subjects the channel to horror
+<fzZzy> it was recently halloween, you know!
+<fzZzy> <string>{\rtf1\mac\ansicpg10000\cocoartf102
+<fzZzy> {\fonttbl}
+<fzZzy> {\colortbl;\red255\green255\blue255;}
+<fzZzy> }</string>
+%
+<fzZzy> in all the time I have sat in z3-dev, I have never heard any conversation...
+<fzZzy> they probably know I am a corporate spy
+%
+<exarkun> To classify things as spam, you just shoot them with the railgun
+%
+<exarkun> glyph: pft!  mutt has blue, red, and white
+<exarkun> glyph: what other colors *are* there?
+<glyph> exarkun: green!
+<exarkun> glyph: green is a liberal myth
+%
+<radix> But isn't britney spears a genius physicist? that's pretty hot.
+        [ref: http://britneyspears.ac/lasers.htm -ed]
+%
+<slyphon> you're a good sport, dash, I'll give you that
+<slyphon> ;)
+<dash> i will give you a mouthful of fist!
+<slyphon> :(
+%
+<saph_w> dash: i want the divmod lunch box
+<saph_w> dash: so i can pack jp his lunches for his telecommute
+%
+<PenguinOfDoom> You do not comprehend how liveevil is horifying and fascinating at the same time.
+<MFen> i comprehend that perfectly
+<MFen> it is like watching a horrible car accident with twisted metal and spinning vehicles everywhere, and suddenly every car dumps its passengers out in midair, they all land on their feet, wearing tuxedos, and take a bow
+%
+<exarkun> dash: You never told me about authorized_keys2
+<dash> you never asked
+<exarkun> You never said I had to
+<dash> you never told me i should!
+%
+<exarkun> glyph: I've decided that it wouldn't be very difficult to do that with a metaclass.
+<exarkun> glyph: And a little bit of bytecode rewriting
+<glyph> exarkun: it always gets down to bytecode rewriting eventually
+<mingus> you guys are out of your f**king minds
+%
+<dash> glyph and I just made a call using quotient and shtoom
+<Yosomono> dash: w00t
+<Yosomono> dash: GIMMEH
+<dash> Yosomono: First glyph has to write the code that will reject your fake CC#z!
+<Yosomono> dash: awwwww
+%
+<glyph> of course
+<glyph> after hours of debugging, two seconds after I say anything about the problem, I realize exactly what it is.
+<dash> glyph: talk earlier
+<glyph> dash: yes, I learned a valuable lesson, etc
+%
+<exarkun> dash: continuations are only a degenerate form of RANDOM MEMORY MODIFICATION
+%
+<fzZzy> the one thing I worried about is changing the "type" of a pool on the fly
+<fzZzy> but maybe that's needless worry
+<exarkun> mmm, we've done that a few times :)
+<fzZzy> done what, changed the type, or worried needlessly?
+<exarkun> what, me worry?
+%
+<slyphon> pingbot: status
+<pingbot> i don't know anything about None
+<etrepum> lol
+<etrepum> zenbot
+%
+<jml> amiramir: ah hah. Well, I'm happy to help with splitting out atop. However, I'm fairly sure that an outsider like me can't do all the work.
+<amiramir> jml: possibly, but our mad scientists are house trained and helpful
+%
+ * slyphon realises that doing a release is kind of like having company over for dinner
+%
+<indigo> you just like to disagree
+<dash> not especially
+<indigo> see?
+<dash> no
+<indigo> my point exactly.
+%
+<indigo> i hate life
+<indigo> definately time for pancakes
+%
+<exarkun> so I need some kind of anti-person system.
+<indigo> i have one of those
+<exarkun> you should patent and sell it.
+<indigo> i'm trying to get rid of it, actually
+%
+<PenguinOfDoom> This is so opensourcelicious
+<PenguinOfDoom> I svnup'd Divmod trunk and LOOK NEW FUNCTIONALITY
+<PenguinOfDoom> This is 0-day for real!
+%
+<glyph> we should have different fanclub realms
+<glyph> On the PvP realms the designations will all be competitive!
+<glyph> the top 10% of contributors are "diamond" etc
+<amberite> Great, and the experienced contributors can camp all the good code branches, and grief the newbie donors.
+<amberite> "HAHAHA N00B!  YOU WILL NEVER GET 'initArgs'!"
+%
+<PenguinOfDoom> exarkun: Hey, do you speak raw utf-8?
+<exarkun> leave me alone
+%

@@ -1,0 +1,13 @@
+
+See: http://mathworld.wolfram.com/Combinator.html
+     http://www.ece.uc.edu/~franco/C511/html/Scheme/ycomb.html
+
+In mathematical terms, "a generalized function whose argument is also a
+function".
+
+Divmod Combinator's purpose is to provide Python developers with a development
+environment by performing common manipulations upon a body of code.  It is
+named after a combinator because both its input and output are code.
+
+Because of the popularity of the Y-combinator, it is conventional to title the
+Windows drive letter where you keep code managed by Combinator "Y:".

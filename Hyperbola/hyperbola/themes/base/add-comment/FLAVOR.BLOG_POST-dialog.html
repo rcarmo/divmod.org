@@ -1,0 +1,49 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  nevow:render="liveElement"
+  class="hyperbola-add-comment hyerpbola-add-comment-dialog">
+  <span class="hyperbola-tag-completions" style="display: none; position: absolute" />
+  <div class="hyperbola-add-post-form">
+    <form class="hyperbola-form" onsubmit="Nevow.Athena.Widget.get(this).submit(); return false">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <label for="title">Title</label>
+            </td>
+            <td>
+              <input style="width: 450px" type="text" name="title">
+                <nevow:attr name="value"
+                  ><nevow:invisible nevow:render="postTitle" /></nevow:attr>
+              </input>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>
+              <label for="body">Body</label>
+            </td>
+            <td>
+              <textarea name="body" rows="20" cols="80"
+                ><nevow:invisible nevow:render="body" /></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="tags">Categories</label>
+            </td>
+            <td>
+              <input style="width: 450px" type="text" name="tags" autocomplete="off" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="right">
+              <input type="submit" value="Cancel" onclick="window.close()" />
+              <input type="submit" value="Post" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

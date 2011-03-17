@@ -1,0 +1,16 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveElement"
+  class="hyperbola-blurb">
+  <h1><nevow:invisible nevow:render="title" /></h1>
+  <div class="hyperbola-blurb-body">
+    <nevow:invisible nevow:render="body" />
+    <div style="font-style: italic">
+      (Created at <nevow:invisible nevow:render="dateCreated" />
+      by <nevow:invisible nevow:render="author" />)
+    </div>
+    <nevow:invisible nevow:render="view">
+      <h2 nevow:pattern="no-child-blurbs">No <nevow:slot name="child-type-name" />s</h2>
+    </nevow:invisible>
+  </div>
+  <nevow:invisible nevow:render="addComment" />
+</div>

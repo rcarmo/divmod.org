@@ -1,0 +1,55 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+     xmlns:athena="http://divmod.org/ns/athena/0.7"
+     nevow:render="liveFragment">
+  <div>
+    <a href="#" onclick="Quotient.Filter.HamConfiguration.get(this).showHelpText(); return false"
+      >What does this mean?</a>
+    <div class="spam-filter-help-text" style="display: none">
+      <h1>Spam Filtering Preferences Help</h1>
+
+      If you have a large volume of email, sometimes, the system that classifies your junk
+      e-mail will become confused, and need to be jostled. Your Divmod team is hard at work
+      improving our spam-removal technology, but until we have managed to perfect it, here
+      are some knobs that you can tweak if it isn't behaving quite like you want it to.
+      <p />
+      <b>Retrain</b> - If you've trained on too many messages, sometimes the spam filter
+      will become 'overtrained' and start thinking that all of your messages look the same.
+      Click this button if you have noticed that large numbers of similar junk messages are
+      continuing to get delivered to your inbox, despite the fact that you've marked a number
+      of them as spam.
+      <p />
+      <b>Reclassify</b> - If the spam filter gets a large number of guesses wrong, sometimes
+      you want to tell it to "try again". If you find yourself clicking the 'this is spam' or
+      'this is not spam' buttons a lot, this button might come in handy.
+      <p />
+      Sometimes, the spam filter won't recognize a particular type of message as spam until you
+      have told it "this is spam" about a similar message before. Some spammers send dozens of
+      similar, or even identical messages, to the same address. If you come back to find your
+      mailbox full of hundreds of copies of similar junk, this button can save you some time:
+      simply classify a few of the junk messages as spam, come to this page and click "reclassify"
+      - the spam filter will notice that it knows more about all those other junk messages in your
+      inbox now, and will deal with them accordingly.
+      <p />
+      The opposite can happen too. Spams commonly contain female names: let's say that you receive
+      a pile of spam from a spammer claiming to be "Angela". You classify it as spam. In some
+      circumstances, this may cause the spam filter to decide that whenever you receive a message
+      mentioning "Angela", it's junk. If you were to later join, let's say, the Murder, She Wrote
+      mailing list, you might receive dozens of legitimate messages regarding "Angela Landsbury
+      - which would then get incorrectly recognized as spam by the spam filter. In that case, go
+      to your spam folder, mark a few of the messages from the mailing list as "not spam", and
+      then click "reclassify"; you won't have to go back and mark them all as "not spam".
+
+      <h2>Click outside this box to close</h2>
+    </div>
+  </div>
+  <button>
+    <athena:handler event="onclick" handler="retrain" />
+    Retrain
+  </button>
+  <button>
+    <athena:handler event="onclick" handler="reclassify" />
+    Reclassify
+  </button>
+  <div nevow:render="postiniForm" />
+</div>
+

@@ -1,0 +1,39 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveFragment">
+
+  <div class="images" nevow:render="images" />
+
+  <span style="font-size: 1.3em" nevow:pattern="no-images">
+    No Images
+  </span>
+
+  <table nevow:pattern="image" style="border-spacing: 0">
+    <nevow:attr name="class"><nevow:slot name="class" /></nevow:attr>
+    <tr>
+      <td>
+        <a rel="lightbox">
+          <nevow:attr name="href"><nevow:slot name="image-url" /></nevow:attr>
+          <img class="thumbnail">
+            <nevow:attr name="src"><nevow:slot name="thumb-url" /></nevow:attr>
+          </img>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div style="margin-bottom: 6px;">
+          <nevow:slot name="sender-stan" /><br />
+          <a>
+            <nevow:attr name="href"><nevow:slot name="message-url" /></nevow:attr>
+            <nevow:slot name="message-subject" />
+          </a>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div nevow:pattern="row-separator" style="clear: both">&#160;</div>
+  <a nevow:pattern="prev-page" href="#" onclick="Quotient.Gallery.Controller.get(this).prevPage(); return false">prev page</a>
+  <a nevow:pattern="next-page" href="#" onclick="Quotient.Gallery.Controller.get(this).nextPage(); return false">next page</a>
+  <div class="pagination-links" style="clear: both" nevow:render="paginationLinks" />
+</div>

@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>AMP Authentication</title>
+  </head>
+  <body>
+    <h1>AMP Authentication</h1>
+
+    <h2>Overview</h2>
+
+    <p>
+      <code class="API">epsilon.ampauth</code> integrates Twisted Cred with
+      <code>twisted.protocols.amp</code>, providing support for selecting a
+      <code>IBoxReceiver</code> based on the result of a Cred login.
+    </p>
+
+    <p>
+      Readers should familiarize themselves with the following concepts in
+      order to understand all sections of this document:
+    </p>
+
+    <ul>
+      <li>
+        Twisted <a
+        href="http://twistedmatrix.com/projects/core/documentation/howto/clients.html">TCP
+        clients</a> and <a
+        href="http://twistedmatrix.com/projects/core/documentation/howto/servers.html">TCP
+        servers</a>
+      </li>
+      <li>
+        <a href="http://twistedmatrix.com/projects/core/documentation/howto/defer.html">
+        Using Deferreds
+        </a>
+      </li>
+      <li>
+        Twisted <code class="API" base="twisted.protocols.amp">AMP</code>
+      </li>
+      <li>
+        <a href="http://twistedmatrix.com/projects/core/documentation/howto/cred.html">
+          Twisted Cred
+        </a>
+      </li>
+    </ul>
+
+    <h2>Servers</h2>
+
+    <p>
+      <code class="API" base="epsilon.ampauth">CredAMPServerFactory</code>
+      is a factory for the <code class="API"
+      base="epsilon.ampauth">CredReceiver</code> protocol, an
+      <code>AMP</code> subclass which implements responders for commands
+      which allow a client to prove their identity.  It uses a
+      <code>Portal</code> to handle these commands and retrieve an <code
+      class="API" base="twisted.protocols.amp">IBoxReceiver</code> which
+      will be used to handle all further AMP boxes it receives.
+    </p>
+
+    <a href="listings/amp/auth_server.py" class="py-listing">
+      AMP server with authentication
+    </a>
+
+    <p>
+      <code>Add</code> and <code>Adder</code> together define a simple AMP
+      protocol for adding two integers together.  <code>AdditionRealm</code>
+      provides the necessary integration between this AMP protocol and Cred,
+      creating new <code>Adder</code> instances whenever an
+      <code>IBoxReceiver</code> is requested - which will be whenever a client
+      attempts to authenticate itself to the server.
+    </p>
+
+    <h2>Clients</h2>
+
+    <p>
+      AMP clients can authenticate with an AMP server using <code class="API"
+      base="epsilon.ampauth">login</code>.  <code>login</code> takes a
+      connected AMP instance and a credentials object as arguments and returns
+      a <code>Deferred</code> which fires when authentication finishes.
+    </p>
+
+    <a href="listings/amp/auth_client.py" class="py-listing">
+      Authenticating AMP client
+    </a>
+
+    <p>
+      The TCP connection is set up as usual, and the <code>Add</code> command
+      is also issued in the usual way.  The only change from a normal AMP
+      client is the use of <code>login</code> after a connection has been set
+      up but before any commands are issued.
+    </p>
+
+    <h2>One-Time Pad Authentication</h2>
+
+    <p>
+      <code class="API">epsilon.ampauth</code> includes an <code class="API"
+        base="twisted.cred.checkers">CredentialsChecker</code> for validating
+      one-time pads: <code class="API"
+        base="epsilon.ampauth">OneTimePadChecker</code>.  If this checker is
+      registered with the portal, clients may use the <code class="API"
+        base="epsilon.ampauth">OTPLogin</code> command to authenticate.
+    </p>
+
+    <a href="listings/amp/amp_auth_server.py" class="py-listing">
+      AMP server with OTP authentication
+    </a>
+
+    <p></p>
+
+    <a href="listings/amp/amp_auth_client.py" class="py-listing">
+      OTP-authenticating AMP client
+    </a>
+  </body>
+</html>

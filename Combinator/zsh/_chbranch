@@ -1,0 +1,18 @@
+#compdef chbranch
+
+projectdir=${$(python -c "import combinator; print combinator.__file__"):h:h:h:h:h}
+getBranchURI="import sys;from combinator.branchmgr import theBranchManager as bm;print bm.projectBranchURI(sys.argv[1], '')"
+
+
+_mkbranch_projects() {
+    compadd $(whbranch|sed 's/: .*$//'|xargs)
+}
+
+_mkbranch_branches() {
+    compadd "trunk"
+    compadd $(svn ls --non-interactive `python -c $getBranchURI $words[2]`)
+}
+
+_arguments : \
+    "1:Projects:_mkbranch_projects" \
+    "2:Branches:_mkbranch_branches"

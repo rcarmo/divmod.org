@@ -1,0 +1,38 @@
+
+1. Verify that buildbot ( http://jade.code-bear.com:8010/ ) is ALL GREEN (for
+   all platforms that it was green for on the last release). Currently: Linux.
+
+2. svn up.
+
+3. Bump version number in <Package>/<package>/__init__.py
+
+4. Write release notes. <Package>/NEWS.txt
+   4a.  set version number in NEWS.txt.
+   4b.  set date in NEWS.txt.
+   5c.  add any new depdencies/versions in DEPS.txt.
+
+5. Run unit tests locally.
+
+6. Check release changes into trunk.
+
+7. Check buildbot again.
+
+8. Tag the release. e.g.:
+
+    % svn cp -m 'Tagging for 0.2.0 release' http://divmod.org/svn/Divmod/trunk/Epsilon http://divmod.org/svn/Divmod/tags/releases/Epsilon-0.2.0
+
+9. Export the release:
+
+    % svn export http://divmod.org/svn/Divmod/tags/releases/Epsilon-0.2.0
+
+10. Create tarball:
+
+    % python setup.py sdist
+
+11. Upload dist/*.gz to appropriate trac page.
+
+12. Enbloggen it
+
+13. PyPI release: python setup.py register
+
+14. Freshmeat release: <xmlrpc thingy maybe>

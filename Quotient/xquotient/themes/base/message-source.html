@@ -1,0 +1,12 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  nevow:render="liveElement">
+
+  <a href="#">
+    <athena:handler event="onclick" handler="cancel" />
+    Go back to message
+  </a>
+
+  <pre class="message-source"><nevow:invisible nevow:render="source" /></pre>
+
+</div>

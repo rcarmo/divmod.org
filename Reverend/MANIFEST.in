@@ -1,0 +1,6 @@
+include README.txt
+include LICENSE
+include changelog.txt
+
+recursive-include examples *.txt
+recursive-include examples *.py

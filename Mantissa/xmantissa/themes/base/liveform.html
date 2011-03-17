@@ -1,0 +1,146 @@
+<div xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  xmlns:nevow="http://nevow.com/ns/nevow/0.1" nevow:render="form">
+  <nevow:slot name="form" />
+
+  <form action="#" nevow:render="liveElement"
+        onsubmit="Nevow.Athena.Widget.get(this).submit(); return false"
+        nevow:pattern="liveform"
+        style="position: relative"
+        >
+
+    <div style="display: none;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                background-color: gray;
+                display: none;
+                "
+         class="progress-message"
+         >
+    </div>
+
+    <div style="display: none;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                background-color: #00aa00;
+                color: #88ff88;
+                "
+         class="success-message">
+    </div>
+
+    <div style="display: none;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                background-color: green;
+                "
+         class="failure-message">
+    </div>
+
+    <fieldset>
+      <legend><nevow:slot name="description" /></legend>
+      <nevow:slot name="inputs" />
+    </fieldset>
+    <nevow:invisible nevow:render="submitbutton" />
+    <span id="input-error-message" />
+  </form>
+
+  <div nevow:pattern="description" class="liveform-param-description">
+    <nevow:slot name="description" />
+  </div>
+
+  <nevow:invisible nevow:pattern="parameter-input">
+    <nevow:slot name="input" />
+    <nevow:slot name="description" />
+  </nevow:invisible>
+
+  <div nevow:pattern="subform" nevow:render="liveElement">
+    <fieldset>
+      <legend><nevow:slot name="description" /></legend>
+      <nevow:slot name="inputs" />
+    </fieldset>
+  </div>
+
+  <div nevow:pattern="text-input-container">
+    <nevow:attr name="class" nevow:render="name">liveform_</nevow:attr>
+    <nevow:invisible nevow:render="label" />
+    <input type="text"><nevow:attr name="name" nevow:render="name" /><nevow:attr name="value" nevow:render="default" /></input>
+  </div>
+
+  <div nevow:pattern="choice-input-container">
+    <nevow:invisible nevow:render="label" />
+    <select nevow:render="multiple">
+      <nevow:attr name="name" nevow:render="name" />
+      <nevow:invisible nevow:render="options">
+        <option nevow:render="selected" nevow:pattern="option">
+          <nevow:attr name="value" nevow:render="index" />
+          <nevow:invisible nevow:render="description" />
+        </option>
+      </nevow:invisible>
+    </select>
+  </div>
+
+  <div nevow:pattern="multi-text-input-container">
+    <nevow:slot name="label" />
+    <nevow:slot name="inputs" />
+  </div>
+
+  <div nevow:pattern="password-input-container">
+    <nevow:attr name="class" nevow:render="name">liveform_</nevow:attr>
+    <nevow:invisible nevow:render="label" />
+    <input type="password"><nevow:attr name="name" nevow:render="name" /><nevow:attr name="value" nevow:render="default" /></input>
+  </div>
+
+  <!-- Repeatable forms use Athena and are LiveElements, so this pattern must
+       have the liveElement renderer.
+    -->
+  <div nevow:render="liveElement" nevow:pattern="repeatable-form-input-container">
+    <nevow:invisible nevow:render="forms" />
+    <div class="liveform-repeater" nevow:pattern="repeater">
+      <a href="#">
+        <athena:handler event="onclick" handler="dom_repeat" />
+        Add another <nevow:slot name="object-description" />
+      </a>
+    </div>
+    <nevow:invisible nevow:render="repeater" />
+  </div>
+
+  <!-- Note that any whitespace in the textarea tag will appear in the
+       output, and so none should be included, if at all possible. -->
+  <div nevow:pattern="textarea-input-container">
+    <nevow:slot name="label" />
+    <textarea><nevow:attr name="name"><nevow:slot name="name" /></nevow:attr><nevow:slot name="value" /></textarea>
+  </div>
+
+  <div nevow:pattern="radio-input-container">
+    <nevow:slot name="input" />
+    <nevow:slot name="label" />
+  </div>
+
+  <div nevow:pattern="form-input-container">
+    <nevow:invisible nevow:render="input" />
+  </div>
+
+  <div nevow:pattern="checkbox-input-container">
+    <nevow:slot name="input" />
+    <nevow:slot name="label" />
+  </div>
+
+  <input nevow:pattern="input">
+    <nevow:attr name="value"><nevow:slot name="value" /></nevow:attr>
+    <nevow:attr name="name"><nevow:slot name="name" /></nevow:attr>
+    <nevow:attr name="type"><nevow:slot name="type" /></nevow:attr>
+  </input>
+
+  <input nevow:pattern="checked-checkbox-input" type="checkbox" checked="true">
+    <nevow:attr name="name"><nevow:slot name="name" /></nevow:attr>
+  </input>
+
+</div>

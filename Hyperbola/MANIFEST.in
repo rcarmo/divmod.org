@@ -1,0 +1,8 @@
+include LICENSE
+include NAME.txt
+include DEPS.txt
+include NEWS.txt
+graft xmantissa
+graft hyperbola
+graft nevow
+graft axiom

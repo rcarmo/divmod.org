@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Writing Mantissa AMP Services</title>
+  </head>
+  <body>
+    <h1>Writing Mantissa AMP Services</h1>
+
+    <h2>Introduction</h2>
+
+    <p>
+      Applications can expose <a
+      href="http://twistedmatrix.com/documents/current/api/twisted.protocols.amp.html">AMP</a>
+      APIs through Mantissa by providing factories to create AMP box receiver
+      objects.  These objects are accessible to authenticated AMP clients and
+      an arbitrary number of them can be served over a single port.
+    </p>
+
+    <p>
+      This document will explain how an application can control Mantissa's
+      response to AMP commands.  It will also explain how to write clients
+      which can connect to the Mantissa server and interact with these
+      applications.
+    </p>
+
+    <p>
+      Readers should familiarize themselves with the following concepts in order
+      to understand all sections of this document:
+    </p>
+
+    <ul>
+      <li>Zope Interfaces</li>
+      <li>Twisted TCP clients</li>
+      <li>Twisted AMP</li>
+      <li>AMP Authentication</li>
+      <li>AMP Routes</li>
+      <li>Axiom Powerups</li>
+      <li>Mantissa Port Configuration</li>
+    </ul>
+
+    <h2>Servers</h2>
+
+    <p>
+      Applications label the AMP functionality they are adding to Mantissa
+      using a protocol identifier.  This serves a similar purpose similar to
+      that of the port number used with TCP connections.  A powerup for <code
+      class="API" base="xmantissa.ixmantissa">IBoxReceiverFactory</code>
+      specifies the name of the AMP functionality it is providing with its
+      <code>protocol</code> attribute.  When a user connects to and
+      authenticates with the Mantissa AMP server, he will be able to select a
+      protocol defined by one of the <code>IBoxReceiverFactory</code> powerups
+      on his store to which to create a new connection.
+    </p>
+
+    <p>
+      Once a client has selected a <code>IBoxReceiverFactory</code> powerup by
+      its <code>protocol</code> attribute, the <code>getBoxReceiver</code>
+      method of that powerup is invoked to create a <code>IBoxReceiver</code>
+      to handle the AMP traffic.  This can be a
+      <code>twisted.protocols.amp.AMP</code> subclass or it can be any other
+      <code>IBoxReceiver</code> implementation.  Whatever is returned will be
+      associated a <code>IBoxSender</code> and then be able to pass boxes to
+      and receive boxes from the client.
+    </p>
+
+    <a href="listings/amp/factory.py" class="py-listing">AMP server powerup</a>
+
+    <p>
+      Here, <code>SimpleFactory</code> uses a URI to ensure uniqueness for the
+      protocol it is specifying and returns a new instance of
+      <code>twisted.protocols.amp.AMP</code> from each call to
+      <code>getBoxReceiver</code>.  This powerup won't be able to do much of
+      interest, since it can't respond to any commands.  If you have an
+      existing <code>AMP</code> subclass which implements responders to an
+      interesting set of commands, returning it here would let a client invoke
+      those commands on it.
+    </p>
+
+    <h2>Clients</h2>
+
+    <p>
+      Clients connecting to a Mantissa AMP server must do two things not
+      generally required of AMP clients: they must authenticate using
+      credentials valid for the Mantissa server and they must select a protocol
+      to which to connect.  For details regarding authentication, see the
+      documentation for <code>epsilon.ampauth</code>.
+    </p>
+
+    <p>
+      <code class="API" base="xmantissa.ampserver">connectRoute</code> allows a
+      client to specify the <code>IBoxReceiverFactory</code> it to which it
+      wants to connect.  It does this by specifying a <code>protocol</code>
+      value.  The <code>IBoxReceiverFactory</code> with a corresponding value
+      for its <code>protocol</code> will be used to create the server-side
+      <code>IBoxReceiver</code>.  For example, if <code>SimpleFactory</code>
+      were installed, specifying
+      <code>u"http://divmod.com/ns/example/0.0"</code> would cause its
+      <code>getBoxReceiver</code> method to be used to create the box receiver.
+    </p>
+
+    <p>
+      Mantissa includes an AMP echo server.  This example connects to a
+      Mantissa server where this powerup has been installed and sends one box
+      to it, printing out the result:
+    </p>
+
+    <a href="listings/amp/connect.py" class="py-listing">AMP echo client</a>
+
+    <p>
+      For clients wishing to take advantage of <code
+        class="API">epsilon.ampauth</code>'s one-time pad authentication
+      support, <code class="API"
+        base="xmantissa.ampserver">AMPConfiguration</code> implements the
+      <code class="API"
+        base="xmantissa.ixmantissa">IOneTimePadGenerator</code> interface, and
+      can generate pads which will be valid for clients connecting to its
+      factory.
+    </p>
+  </body>
+</html>

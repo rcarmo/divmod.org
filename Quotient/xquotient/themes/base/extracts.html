@@ -1,0 +1,11 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1" style="padding: 8px;">
+  <div nevow:pattern="horizontal-pane">
+    <div class="collapsible-pane" onclick="Quotient.Common.CollapsiblePane.toggle(this); return false">
+      <img class="collapse-arrow" src="/static/Quotient/images/outline-collapsed.png" />
+      <nevow:slot name="title" /></div>
+    <div class="pane-body" style="position: absolute; top: -1000px; left: -1000px">
+      <nevow:slot name="body" />
+    </div>
+  </div>
+  <nevow:invisible nevow:render="extractPanes" />
+</div>

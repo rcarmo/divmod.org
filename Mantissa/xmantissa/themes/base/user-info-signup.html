@@ -1,0 +1,158 @@
+<form
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveElement"
+  action="#"
+  onsubmit="Nevow.Athena.Widget.get(this).submit(); return false"
+  class="user-info-signup-form"
+  >
+  <div class="progress-message"
+       style="display: none">
+    Signing Up...
+  </div>
+
+  <div class="success-message"
+       style="display: none">
+    <div>
+      Congratulations!  You've signed up.
+    </div>
+    <div>
+      <a href="/login">Now, to start using the site, click here to log in.</a>
+    </div>
+  </div>
+
+  <div style="display: none"
+    class="failure-message">
+    Your attempt to sign up has failed on the server for some reason.  This
+    should really never happen: please report this error to <a href="mailto:support@divmod.com">Divmod support</a>.
+  </div>
+
+  <table cellpadding="0" cellspacing="0" align="center" class="divmod-table">
+    <tr class="divmod-table-header">
+      <td class="divmod-table-header-left-block" />
+      <td class="divmod-table-header-stretcher">&#160;</td>
+      <td class="divmod-table-header-right-block" align="right">
+        <img src="/Mantissa/images/divmod-table-header-right-block.png" />
+      </td>
+    </tr>
+    <tr class="divmod-table-body-container">
+      <td colspan="3">
+        <table cellpadding="0" cellspacing="0" style="width: 100%">
+          <tr class="divmod-table-body">
+            <td class="divmod-table-body-left-edge">&#160;</td>
+            <td>
+              <table cellpadding="0" cellspacing="0" style="width: 100%">
+                <tr>
+                  <td class="divmod-table-body-content">
+                    <table>
+                      <tr>
+                        <td class="label">Real Name</td>
+                        <td class="verified-field">
+                          <input
+                            type="text"
+                            name="realName"
+                            class="text-input"
+                            onkeyup="Nevow.Athena.Widget.get(this).verifyNotEmpty(this)"
+                            onblur="Nevow.Athena.Widget.get(this).verifyNotEmpty(this)"
+                            onfocus="Nevow.Athena.Widget.get(this).focus(this)"
+                            />
+
+                          <img src="/Mantissa/images/neutral-small.png" class="verify-status" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="label">User Name</td>
+                        <td class="verified-field">
+                          <input
+                            type="text"
+                            name="username"
+                            class="text-input"
+                            onkeyup="Nevow.Athena.Widget.get(this).verifyUsernameAvailable(this)"
+                            onblur="Nevow.Athena.Widget.get(this).verifyUsernameAvailable(this)"
+                            onfocus="Nevow.Athena.Widget.get(this).focus(this)"
+                            />
+
+                          <img src="/Mantissa/images/neutral-small.png" class="verify-status" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="label">Password</td>
+                        <td class="verified-field">
+                          <input
+                            type="password"
+                            name="password"
+                            class="password-input"
+                            onkeyup="Nevow.Athena.Widget.get(this).verifyStrongPassword(this)"
+                            onblur="Nevow.Athena.Widget.get(this).verifyStrongPassword(this)"
+                            onfocus="Nevow.Athena.Widget.get(this).focus(this)"
+                            />
+
+                          <img src="/Mantissa/images/neutral-small.png" class="verify-status" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="label">Confirm Password</td>
+                        <td class="verified-field">
+                          <input
+                            type="password"
+                            name="confirmPassword"
+                            class="password-input"
+                            onkeyup="Nevow.Athena.Widget.get(this).verifyPasswordsMatch(this)"
+                            onblur="Nevow.Athena.Widget.get(this).verifyPasswordsMatch(this)"
+                            onfocus="Nevow.Athena.Widget.get(this).focus(this)"
+                            />
+
+                          <img src="/Mantissa/images/neutral-small.png" class="verify-status" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="label">Email Address</td>
+                        <td class="verified-field">
+                          <input
+                            type="text"
+                            name="emailAddress"
+                            class="text-input"
+                            onkeyup="Nevow.Athena.Widget.get(this).verifyValidEmail(this)"
+                            onblur="Nevow.Athena.Widget.get(this).verifyValidEmail(this)"
+                            onfocus="Nevow.Athena.Widget.get(this).focus(this)"
+                            />
+
+                          <img src="/Mantissa/images/neutral-small.png" class="verify-status" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td />
+                        <td class="validation-message">Please enter your details</td>
+                      </tr>
+                      <tr>
+                        <td />
+                        <td class="divmod-table-body-button-container">
+                          <input type="submit"
+                            name="__submit__"
+                            value="Create Account"
+                            disabled="true" />
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="divmod-table-body-right-edge">&#160;</td>
+          </tr>
+          <tr class="divmod-table-footer-container">
+            <td colspan="3">
+              <table cellpadding="0" cellspacing="0">
+                <tr class="divmod-table-footer">
+                  <td class="divmod-table-footer-left-corner"><div style="width: 10px" /></td>
+                  <td class="divmod-table-footer-bottom-edge" />
+                  <td class="divmod-table-footer-right-corner"><div style="width: 10px" /></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>

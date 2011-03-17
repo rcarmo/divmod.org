@@ -1,0 +1,67 @@
+# -*- mode: sh -*-
+
+SVNLOOK=/usr/bin/svnlook
+
+function _combinator_projectDir() {
+    local pdir=`python -c "import combinator; print combinator.__file__"`
+    for i in `seq 1 4`; do
+	pdir=`dirname $pdir`
+    done
+    echo -n "$pdir"
+}
+
+function _combinator_branchURI() {
+    local projectName=$1;
+    local buri=`python -c "\
+
+import sys
+from combinator.branchmgr import theBranchManager as bm
+print bm.projectBranchURI(sys.argv[1], \"\")
+
+" "$projectName"`
+    echo -n "$buri"
+}
+
+function _completeproject () {
+    # You _MUST_ have a local var called 'cur' to make _filedir happy.  (heh.
+    # "local" var.) --glyph
+    local cur=${COMP_WORDS[$COMP_CWORD]}
+    pushd `dirname "$(_combinator_projectDir)"` > /dev/null
+    _filedir -d
+    popd > /dev/null
+    return 0
+}
+
+function _chbranch() {
+    local cur=${COMP_WORDS[$COMP_CWORD]}
+    case ${COMP_CWORD} in
+	1)
+            _completeproject
+            return $?
+	    ;;
+	2)
+            local project=$3;
+            local blist=`svn ls --non-interactive "$(_combinator_branchURI $project)"`
+            blist=`echo "$blist" | sed -e 's,/,,g'`
+	    COMPREPLY=($(compgen -W "$blist" -- $cur))
+	    return 0
+	    ;;
+    esac
+}
+
+function _unbranch_mkbranch() {
+    case ${COMP_CWORD} in
+	1)
+            _completeproject
+            return $?
+	    ;;
+    esac
+}
+
+if [ -e /etc/bash_completion ]; then
+    . /etc/bash_completion
+
+    complete -F _chbranch chbranch
+    complete -F _unbranch_mkbranch unbranch
+    complete -F _unbranch_mkbranch mkbranch
+fi

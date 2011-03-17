@@ -1,0 +1,20 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  nevow:render="liveElement">
+
+  <nevow:invisible nevow:render="mimeTypeChooser">
+    <div nevow:pattern="mime-type-choices">
+      Parts of this message are available in the following alternate formats:
+      <nevow:slot name="choices" />
+    </div>
+
+    <a href="#" nevow:pattern="mime-type-choice"
+      ><athena:handler event="onclick"
+      handler="dom_chooseDisplayMIMEType" /><nevow:slot name="type" /></a>
+  </nevow:invisible>
+
+  <div class="message-body"
+    ><nevow:invisible
+    nevow:render="body"><nevow:slot
+    name="paragraphs" /></nevow:invisible></div>
+</div>

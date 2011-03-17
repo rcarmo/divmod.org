@@ -1,0 +1,76 @@
+<form method="post" name="loginForm" xmlns:nevow="http://nevow.com/ns/nevow/0.1" class="login-form">
+  <nevow:attr name="action"><nevow:slot name="login-action" /></nevow:attr>
+
+  <table cellpadding="0" cellspacing="0" align="center" class="divmod-table">
+    <tr class="divmod-table-header">
+      <td class="divmod-table-header-left-block" />
+      <td class="divmod-table-header-stretcher">&#160;</td>
+      <td class="divmod-table-header-right-block" align="right">
+        <img src="/Mantissa/images/divmod-table-header-right-block.png" />
+      </td>
+    </tr>
+    <tr class="divmod-table-body-container">
+      <td colspan="3">
+        <table cellpadding="0" cellspacing="0" style="width: 100%">
+          <tr class="divmod-table-body">
+            <td class="divmod-table-body-left-edge">&#160;</td>
+            <td>
+              <table cellpadding="0" cellspacing="0" style="width: 100%">
+                <tr>
+                  <td class="divmod-table-body-content">
+                    <table>
+                      <tr>
+                        <td>Username:</td>
+                        <td><input type="text" name="username" /></td>
+                      </tr>
+                      <tr>
+                        <td>Password:</td>
+                        <td><input type="password" name="password" /></td>
+                      </tr>
+                      <tr>
+                        <td>Remember Me:</td>
+                        <td><input type="checkbox" name="rememberMe" /></td>
+                      </tr>
+                      <tr>
+                        <td />
+                        <td class="divmod-table-body-button-container">
+                          <input type="submit" value="Log In" />
+                          <a href="/resetPassword" class="forgot-password">Forgot Password?</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <nevow:slot name="error" />
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="divmod-table-body-right-edge">&#160;</td>
+          </tr>
+          <tr class="divmod-table-footer-container">
+            <td colspan="3">
+              <table cellpadding="0" cellspacing="0">
+                <tr class="divmod-table-footer">
+                  <td class="divmod-table-footer-left-corner"><div style="width: 10px" /></td>
+                  <td class="divmod-table-footer-bottom-edge" />
+                  <td class="divmod-table-footer-right-corner"><div style="width: 10px" /></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <div nevow:pattern="error" style="padding-top: 5px">
+    <span style="color: red">Login Failure:</span> <i><nevow:slot name="error" /></i>
+  </div>
+
+  <script type="text/javascript">
+    document.loginForm.username.focus();
+  </script>
+</form>

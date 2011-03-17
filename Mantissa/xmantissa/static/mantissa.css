@@ -1,0 +1,1436 @@
+body {
+    font: 80% Helvetica, Arial, sans-serif;
+}
+
+iframe.mugshot-upload {
+    width: 500px;
+    height: 100px;
+    border-width: 0px;
+}
+
+.mantissa-inequality-scroller {
+    overflow: auto;
+    position: relative;
+    height: 300px;
+}
+
+.add-person .liveform-input-label, .import-people .liveform-input-label {
+    width: 10em;
+    padding-right: 1em;
+    text-align: right;
+    font-weight: bold;
+    color: #666666;
+    font-size: 80%;
+}
+
+.add-person .repeatable-form-repeat-link,
+.add-person .repeated-form-remove-link {
+    margin-left: 11em;
+}
+
+.add-person .liveform-repeater,
+.add-person .repeated-form-remove-link-container {
+    margin-top: 4px;
+}
+
+.add-person input[type=text] {
+    width: 15em;
+}
+
+.add-person table td {
+    padding-top: 6px;
+}
+
+.add-person table {
+    border-collapse: collapse;
+}
+
+.import-people .import-result {
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.import-people textarea {
+    width: 40em;
+}
+
+/**
+ * This is the class of the container of either the signup/login UI (for
+ * unauthenticated users) or the application menubar and username label (for
+ * authenticated users) used by the shell template.
+ */
+.mantissa-global-navigation-links {
+    width: 100%;
+    /* This height must be the same as the height for divmod-menu-icon.  It is
+     * the height of divorg-menu.png.
+     */
+    height: 25px;
+    text-align: right;
+    margin-right: 1px;
+    background-image: url(/Mantissa/images/menubar-bg.png);
+}
+
+.mantissa-global-navigation-separator {
+    color: #757575;
+}
+
+.person-read-only-contact-info fieldset {
+    margin-bottom: 4px;
+}
+
+.person-read-only-contact-info fieldset legend {
+    font-style: italic;
+    font-size: 110%;
+}
+
+.read-only-contact-item-label {
+    padding-right: 1em;
+    font-weight: bold;
+    color: #666666;
+    font-size: 80%;
+    width: 150px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.read-only-contact-item {
+    padding-bottom: 8px;
+}
+
+.person-summary-name {
+    font-size: 140%;
+}
+
+.person-summary {
+    margin-bottom: 6px;
+}
+
+.people-table-filter-cell {
+    position: absolute;
+    top: 35px;
+    bottom: 0px;
+    width: 200px;
+}
+
+.people-table-filter-cell a.people-table-filter:link,
+.people-table-filter-cell a.people-table-filter:visited {
+    color: #0071BB;
+}
+
+.people-table-filter-cell a.people-table-selected-filter:link,
+.people-table-filter-cell a.people-table-selected-filter:visited {
+    color: #FFFFFF;
+}
+
+.people-table-list-cell {
+    position: absolute;
+    top: 35px;
+    bottom: 0px;
+    left: 200px;
+    width: 200px;
+    border-left: solid 1px #C4CFDB;
+}
+
+.people-table-list-cell .mantissa-row-region-node {
+    width: 200px;
+}
+
+.people-table-list-cell > div {
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 200px;
+}
+
+.people-table-person-cell {
+    position: absolute;
+    top: 35px;
+    right: 0px;
+    bottom: 0px;
+    left: 400px;
+    border-left: solid 1px #C4CFDB;
+    overflow: auto;
+    padding: 6px;
+}
+
+.person-list-person-row, .person-list-selected-person-row {
+    border: 0px;
+    padding: 4px;
+    margin: 0px;
+    width: 100%;
+}
+
+.people-table-filter, .people-table-selected-filter {
+    padding: 4px;
+    display: block;
+}
+
+.person-list-selected-person-row, .people-table-selected-filter {
+    color: #FFFFFF;
+    background-color: #0071BB;
+    background-image: url(/Mantissa/images/people-table-arrow.png);
+    background-repeat: no-repeat;
+    background-position: 92% 50%;
+}
+
+.person-list-person-row {
+    color: #0071BB;
+}
+
+.person-list-person-row:hover {
+    cursor: pointer;
+}
+
+.person-list-person-row img, .person-list-selected-person-row img {
+    border-width: 0px;
+    padding-left: 4px;
+    position: relative;
+    bottom: -4px;
+}
+
+.cancel-form-link img {
+    border-width: 0px;
+}
+
+.person-summary {
+    padding-left: 6px;
+}
+
+.people-table {
+    position: absolute;
+    top: 0px; bottom: 0px; left: 0px; right: 0px;
+}
+
+.people-table-header {
+    height: 35px;
+    width: 100%;
+    color: #000000;
+    font-weight: bold;
+    border-bottom: solid 1px #DEDEDF;
+    border-top: solid 1px #DDDDDE;
+}
+
+.people-organizer .mantissa-inequality-scroller {
+    height: 100%;
+}
+
+.people-organizer > div {
+    position: absolute;
+    bottom: 0px; left: 0px; right: 0px;
+}
+
+.people-table-container {
+    position: relative;
+    height: 100%;
+}
+
+.people-table-filter-col-header {
+    width: 200px;
+}
+
+.people-table-filter-col-header img {
+    float: right;
+    margin-right: 7px;
+}
+
+.people-table-list-col-header {
+    width: 200px;
+}
+
+.people-table-header td {
+    background-image: url(/Mantissa/images/people-table-column-header-bg.png);
+    background-color: #E3E3E3;
+    background-repeat: repeat-x;
+    background-position: top left;
+    padding-left: 4px;
+    border-bottom: solid 1px #DBDBDC;
+}
+
+.people-table-header a:link,
+.people-table-header a:visited,
+.people-table-header a:active,
+.people-table-person-container a:link,
+.people-table-person-container a:visited,
+.people-table-person-container a:active {
+    color: #0071BB;
+}
+
+.people-table a:link,
+.people-table a:visited,
+.people-table a:active {
+    font-weight: normal;
+    font-size: 80%;
+}
+
+
+.forgot-password:visited, .forgot-password:link {
+    font-weight: bold;
+    color: #B894DB;
+}
+
+.liveform-param-description {
+    padding-left: 4px;
+    font-style: italic;
+}
+
+/* person widget styles */
+
+.person-widget-left-edge {
+    border-left: solid 1px #FFCC99;
+    font-size: 0px;
+}
+
+.person-widget-right-edge {
+    border-right: solid 1px #FFCC99;
+    font-size: 0px;
+}
+
+.person-widget-top-edge {
+    border-top: solid 1px #FFCC99;
+    font-size: 0px;
+}
+
+.person-widget-bottom-edge {
+    border-bottom: solid 1px #FFCC99;
+    font-size: 0px;
+}
+
+.person-widget-corner {
+    height: 2px;
+    width: 2px;
+}
+
+.person-widget-empty-corner {
+    width: 2px;
+    background-color: #FFCC99;
+}
+
+.person-widget-content {
+    padding: 3px;
+}
+
+.person-widget {
+    background-color: #FFF6ED;
+}
+
+.person-widget-corner img {
+    vertical-align: top;
+}
+
+.person-widget-row {
+    line-height: 0px;
+    font-size: 0px;
+}
+
+
+.front-page-splash-logo {
+    background-image: url(/Mantissa/images/divorg-large.png);
+    width: 430px;
+    height: 239px;
+}
+
+.shell-content {
+    height: 100%;
+}
+
+.divmod-table {
+    margin-top: 70px;
+}
+
+.divmod-table input.text-input,
+.divmod-table input.password-input {
+    width: 15em;
+}
+
+.divmod-table-header-stretcher {
+    background-image: url(/Mantissa/images/divmod-table-header-tileable-stretcher.png);
+    background-repeat: repeat-x;
+}
+
+.login-form .divmod-table-header-left-block {
+    background-image: url(/Mantissa/images/login-table-header-left-block.png);
+    background-repeat: no-repeat;
+    width: 61px;
+}
+
+.user-info-signup-form {
+    position: relative;
+}
+
+.user-info-signup-form .divmod-table-header-left-block {
+    background-image: url(/Mantissa/images/signup-table-header-left-block.png);
+    background-repeat: no-repeat;
+    width: 71px;
+}
+
+.user-info-signup-form .success-message a {
+    text-decoration: underline;
+}
+
+.user-info-signup-form .success-message,
+.user-info-signup-form .failure-message,
+.user-info-signup-form .progress-message
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: white;
+    color: #999999;
+    font-weight: bold;
+    font-size: 72px;
+    padding-top: 1em;
+    padding-left: 3em;
+    padding-right: 3em;
+
+    /* This appears over a form button, which apparently has some wonky z-index
+     * property of its own; without this, the form button sticks out. */
+
+    z-index: 1000;
+}
+
+.user-info-signup-form .failure-message {
+    color: red;
+}
+
+
+.divmod-table-header-title {
+    margin-left: 16px;
+    margin-bottom: 4px;
+    color: #FFFFFF;
+    font-size: 1.3em;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.divmod-table-header-right-block {
+    width: 153px;
+}
+
+.divmod-table-body-left-edge {
+    background-image: url(/Mantissa/images/divmod-table-body-left-edge.png);
+    background-repeat: repeat-y;
+    background-position: top left;
+    width: 6px;
+}
+
+.divmod-table-body-right-edge {
+    background-image: url(/Mantissa/images/divmod-table-body-right-edge.png);
+    background-repeat: repeat-y;
+    background-position: top right;
+    width: 6px;
+}
+
+.divmod-table-body-button-container {
+    padding: 20px 0px 20px 0px;
+}
+
+.divmod-table-body-content {
+    width: 100%;
+    padding: 6px 70px 6px 6px;
+    line-height: normal;
+    background-image: url(/Mantissa/images/divorg-divmod-table-bg.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+
+.divmod-table-body, .divmod-table-header, .divmod-table-header-container {
+    line-height: 0px;
+}
+
+.divmod-table-footer-left-corner, .divmod-table-footer-right-corner {
+    height: 7px;
+}
+
+.divmod-table-footer-left-corner {
+    background-image: url(/Mantissa/images/divmod-table-footer-left-corner.png);
+}
+
+.divmod-table-footer-right-corner {
+    background-image: url(/Mantissa/images/divmod-table-footer-right-corner.png);
+}
+
+.divmod-table-footer-bottom-edge {
+    background-image: url(/Mantissa/images/divmod-table-footer-bottom-edge.png);
+    background-repeat: repeat-x;
+    width: 100%;
+}
+
+.summary-header-row {
+    line-height: 0px;
+}
+
+.contact-info-action-create,
+.contact-info-action-delete,
+.contact-info-action-save,
+.contact-info-action-edit,
+.contact-info-action-add,
+.contact-info-action-cancel {
+    font-size: 85%;
+    font-style: italic;
+}
+
+.summary-header-stretcher {
+    width: 100%;
+    background-color: #FFE8D9;
+}
+
+.summary-body-container {
+    background-color: #FFF7F2;
+}
+
+.summary-body-container .tdb-table  {
+    height: 300px;
+    overflow: auto;
+}
+
+.summary-body-container .tdb-navigation-panel {
+    text-align: right;
+    padding-top: 2px;
+}
+
+.summary-body-container .tdb-control-panel {
+    display: none;
+}
+
+.summary-body-container .tdb {
+    white-space: normal;
+    border: none;
+    margin: 0px;
+}
+
+.summary-body-container .tdb th {
+    display: none;
+}
+
+.summary-body-container .tdb > tbody > tr > td {
+    background: none;
+    padding: 0px;
+    padding: 2px 0px 2px 0px;
+    border-bottom: dashed 1px #FF6600;
+    border-right: none;
+}
+
+.summary-footer-table {
+    background-color: #FFE8D9;
+}
+
+.summary-footer-row {
+    line-height: 0px;
+}
+
+.summary-footer-stretcher {
+    width: 100%;
+}
+
+.person-name-container {
+    background-color: #FFE8D9;
+    padding: 8px 0px 8px 84px;
+    font-size: 1.7em;
+    color: #666666;
+}
+
+.fragment-middle-row .fragment-container {
+    background-color: #FFFFFF;
+}
+
+.mugshot-container {
+    line-height: 0px;
+}
+
+.mugshot {
+    margin: 4px;
+    padding: 2px;
+    border: solid 1px #E1E1E1;
+}
+
+.mugshot-change-link {
+    margin: 4px;
+    font-size: 85%;
+    font-style: italic;
+}
+
+.mugshot-form {
+    margin: 4px;
+}
+
+.fragment-cell {
+    padding: 0px 1px 0px 1px;
+}
+
+.fragment-cell td {
+    white-space: nowrap;
+}
+
+.person-name-container img {
+    vertical-align: middle;
+}
+
+.person-fragment {
+    border-spacing: 0px;
+    margin: 4px;
+}
+
+.person-fragment .footer-row {
+    line-height: 0px;
+    font-size: 0px;
+}
+
+.header-row {
+    color: #666666;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.person-fragment .header-row .title-cell {
+    width: 100%;
+}
+
+.person-fragment .header-row .title-cell span {
+    margin-left: 8px;
+}
+
+.header-row .left-image, .right-image {
+    vertical-align: top;
+    position: relative;
+    top: -1px;
+}
+
+.stretch-cell {
+    width: 100%;
+    border-bottom: solid 1px #D9F0F7;
+}
+
+.header-row .image-cell .left-image {
+    left: -1px;
+}
+
+.header-row .image-cell .right-image {
+    left: 1px;
+}
+
+.person-fragment .header-row td, .fragment-cell {
+    background-color: #D9F0F7;
+}
+
+.person-detail {
+    padding-left: 50px;
+}
+
+.contact-type-icon {
+    margin: 4px 4px 0px 4px;
+}
+
+.contact-detail {
+    margin: 4px;
+}
+
+.contact-info-items {
+    padding-right: 4px;
+}
+
+.contact-info-summary {
+    border: solid 1px #FFE8D9;
+    margin: 0px 4px 4px 4px;
+    color: #666666;
+}
+
+.contact-info-summary .contact-header {
+    height: 20px;
+    background-color: #FFF7F2;
+}
+
+#search-button {
+    margin: 0px 4px 0px 4px;
+}
+
+/* The following classes are now visible only by the admin, and potentially by
+ legacy code.  They are not particularly pretty, but they aren't really
+ intended to be. */
+
+#divmod-menu, .subtabs {
+    position: absolute;
+    border: 1px solid black;
+    background-color: #eeeeee;
+    border-left: solid 8px #525252;
+    margin: 0px;
+    list-style: none;
+    padding: 0px;
+}
+
+.subtabs a, .subtabs a:link, .subtabs a:visited {
+    font-size: 130%;
+    display: block;
+    padding: 4px;
+    width: 150px;
+    color: black;
+}
+
+.subtabs a:hover {
+    background-color: blue;
+    color: white;
+}
+
+#divmod-menu {
+    /* This width is and must be exactly the width of divorg-menu.png.
+     * .divmod-menu-icon and .divmod-menu-container also reference this
+     * value.
+     */
+    min-width: 41px;
+    z-index: 99;
+    white-space: nowrap;
+}
+
+#divmod-menu li {
+    display: inline;
+}
+
+#divmod-menu a {
+    padding: 2px 2px 2px 4px;
+}
+
+/**
+ * make sure the menu displays below the icon on IE, not next to it.
+ */
+.divmod-menu-icon {
+    /* This width is and must be exactly the width of divorg-menu.png.
+     * #divmod-menu and .divmod-menu-container also reference this value.
+     */
+    width: 41px;
+    /*
+     * This height must be the same as the height for mantissa-menubar-links.
+     */
+    height: 25px;
+    background-image: url(/Mantissa/images/divorg-menu.png);
+}
+
+.menu-separator {
+    height: 2px;
+    background-image: url(/Mantissa/images/menu-separator.png);
+    background-repeat: repeat-x;
+    font-size: 0px;
+    padding: 1px 0px 1px 0px;
+    width: 100%;
+}
+
+.tab-link {
+    font-size: 1.2em;
+    display: block;
+    /* hack to force this element to "have layout" on IE */
+    zoom: 1;
+}
+
+.tab-link:link, .tab-link:visited {
+    color: #CCCCCC;
+}
+
+.tab-link:hover {
+    color: #FFFFFF;
+}
+
+.divmod-menu-container {
+    background-color: #000000;
+    border-right: solid 1px #666666;
+    vertical-align: top;
+    /* This width is and must be exactly the width of divorg-menu.png.
+     * #divmod-menu and .divmod-menu-icon also reference this value.
+     */
+    width: 41px;
+    cursor: pointer;
+}
+
+.app-nav-container {
+    white-space: nowrap;
+}
+
+.search-container {
+    height: 100%;
+    vertical-align: middle;
+}
+
+.mantissa-global-username {
+    color: #FFFFFF;
+}
+
+.tab-button, .selected-tab-button {
+    float: left;
+    display: block;
+    margin-left: 8px;
+}
+
+.tab-contents, .selected-tab-contents {
+    position: relative;
+}
+
+.tab-button {
+    margin-bottom: 2px;
+}
+
+.selected-tab-button {
+    border-bottom: solid 1px #0099CC;
+}
+
+.tab-button-row {
+    line-height: 0px;
+}
+
+.selected-tab-button .tab-tl-corner, .selected-tab-button .tab-tr-corner {
+    width: 3px;
+    height: 3px;
+}
+
+.tab-corner {
+    vertical-align: top;
+}
+
+.tab-button .tab-top-edge {
+    height: 3px;
+}
+
+.tab-text-cell {
+    color: #FFFFFF;
+    padding: 2px 4px 0px 4px;
+    font-size: 1.4em;
+}
+
+.selected-tab-button .tab-text-cell {
+    padding: 2px 0px 0px 0px;
+}
+
+.tab-text-cell div {
+    margin-bottom: 2px;
+}
+
+.tab-text-cell a, .tab-text-cell a:visited, .tab-text-cell a:link {
+    color: #FFFFFF;
+}
+
+.selected-tab-button .tab-text-row {
+    background-image: url(/Mantissa/images/tab-bg.png);
+    background-color: #77C9E3;
+    background-repeat: repeat-x;
+}
+
+.tab-text-row {
+    text-align: center;
+}
+
+.selected-tab-button .tab-top-edge {
+    background-image: url(/Mantissa/images/tab-top-edge-bg.png);
+    background-repeat: repeat-x;
+}
+
+.tab-button:hover .tab-top-edge {
+    border-bottom: solid 1px #323232;
+}
+
+.tab-button:hover .tab-left-edge {
+    background-color: #323232;
+}
+
+.tab-button .tab-left-edge, .tab-button .tab-right-edge {
+    width: 1px;
+}
+
+.tab-button .tab-bottom-edge {
+    height: 1px;
+}
+
+.tab-button:hover .tab-right-edge, .tab-button:hover .tab-bottom-edge {
+    background-color: #505050;
+}
+
+.tab-button:hover .tab-text-cell {
+    background-color: #484848;
+}
+
+.selected-tab-button .tab-left-edge {
+    background-color: #76C8E3;
+    background-repeat: repeat-x;
+    background-image: url(/Mantissa/images/tab-left-edge.png);
+    width: 17px;
+}
+
+.selected-tab-button .tab-right-edge {
+    background-color: #76C8E3;
+    background-repeat: repeat-x;
+    background-image: url(/Mantissa/images/tab-right-edge.png);
+    width: 17px;
+}
+
+.selected-tab-button .tab-tl-corner {
+    background-image: url(/Mantissa/images/tab-tl-corner.png);
+}
+
+.selected-tab-button .tab-tr-corner {
+    background-image: url(/Mantissa/images/tab-tr-corner.png);
+}
+
+.scrolltable-widget-node {
+    margin: 4px;
+}
+
+.scrolltable {
+    border: solid 1px #CCCCCC;
+    width: 100%;
+    border-spacing: 0px;
+    table-layout: fixed;
+}
+
+.scroll-header-container {
+    background-color: #E0E0E0;
+    background-image: url(/Mantissa/images/scrolltable-header-bg.png);
+    background-repeat: repeat-x;
+    color: #999999;
+    font-weight: bold;
+}
+
+.scroll-header-container td {
+    border-bottom: solid 1px #CCCCCC;
+}
+
+.scroll-row {
+    white-space: nowrap;
+}
+
+.scroll-row a:link, .scroll-row a:visited {
+    color: #000000;
+}
+
+.scroll-row:hover .scroll-cell {
+    background-color: #DADADA;
+}
+
+.scroll-column-header, .scroll-cell, .sortable-scroll-column-header, .actions-column-header {
+    border-right: solid 1px #CCCCCC;
+    overflow: hidden;
+}
+
+.scroll-cell {
+    padding: 4px;
+}
+
+.scroll-row .placeholder-cell {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.scrolltable-loading {
+    font-size: 200%;
+    opacity: 0.5;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #cccccc;
+    color: black;
+}
+
+.scrolltable-loading div {
+    position: absolute;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+}
+
+.placeholder-cell {
+    background-image: url(/Mantissa/images/ellipsis.png);
+    background-repeat: repeat-y;
+    background-position: center center;
+}
+
+.sortable-scroll-column-header:hover {
+    text-decoration: underline;
+}
+
+.sortable-scroll-column-header {
+    cursor: pointer;
+}
+
+td.multi-text-input-list > input {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.tdb {
+    border-left: 1px solid #E5E5E5;
+    border-top: 1px solid #E5E5E5;
+    margin: 0 7px 10px;
+    border-collapse: separate !important;
+    border-collapse: collapse;
+    border-spacing: 0;
+    white-space: nowrap;
+}
+
+td.text { overflow: hidden }
+
+.tdb > tbody > tr > td, .tdb th {
+    border-bottom: 1px solid #E5E5E5;
+    border-left: 1px #fff solid;
+    border-right: 1px solid #E5E5E5;
+    border-top: 1px #fff solid;
+}
+
+.tdb > tbody > tr > td {
+    background: #F9F9F9;
+    padding: 3px;
+}
+
+.tdb th {
+    background: #f1f1f1;
+    font-weight: bold;
+    padding: 4px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+a:link    { color: #7C7777; text-decoration: none }
+a:visited { color: #A6A6A6; text-decoration: none }
+a:hover   { color: #575757; text-decoration: none }
+a:active  { color: #000000; text-decoration: underline }
+
+/* in authentication-configuration.html */
+.authentication-panel {
+    padding: 15px;
+}
+
+/* in preference-editor.html */
+.preference-panel {
+    padding: 15px;
+    padding-bottom: 0px;
+}
+
+input.change-password {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.control-cell {
+    text-align: center;
+}
+
+/* styles for the tdb - kind of similar but pretty different to the
+ * control-table used in "my account" because the tdb cells we want to
+ * accentuate are in the first row, rather than the first column */
+
+.tdb-action-result {
+    white-space: nowrap;
+    color: #04a700;
+    font-weight: bold;
+}
+
+.tdb-clickable-header {
+    cursor: pointer;
+}
+
+.tdb-no-rows-dialog {
+    font-size: 2.2em;
+    color: #CCCCCC;
+    font-style: italic;
+}
+
+th.tdb-clickable-header:hover {
+    background-image: url(/Mantissa/images/header_bg_hover.png);
+}
+
+.tdb-action {
+    border: 0px;
+    padding: 2px;
+}
+
+.sort-arrow {
+    color: #000000;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+/* the table of controls used by preferences & auth fragments */
+table.control-table {
+    border-spacing: 0px;
+    width: 70%;
+    border: solid 1px #CACACA;
+    border-right: none;
+}
+
+/* set the first row to have a pretty bg image */
+table.control-table > thead {
+    background-color: #FFFFFF;
+    background-image: url(/Mantissa/images/header_bg.png);
+    background-repeat: repeat-x;
+    background-position: bottom left
+}
+
+/* set the first row to be bold-face */
+table.control-table > thead > tr > td {
+    padding: 5px;
+    font-weight: bold;
+    border-right: solid 1px #CACACA;
+    border-bottom: solid 1px #CACACA;
+}
+
+/* put a grey border around all other rows */
+table.control-table > tbody > tr > td {
+    border-right: solid 1px #CACACA;
+    padding: 5px;
+}
+
+#results-summary {
+    background-color: #CACACA;
+    border: solid 1px #B0B0B0;
+    padding: 5px;
+    text-align: right;
+}
+
+/* shell template styles */
+
+/* the panel that contains username/logout/my-account */
+.logged-in-panel {
+    text-align: right;
+    padding-right: 4px;
+    white-space: nowrap;
+}
+
+#search-form {
+    padding: 6px;
+    position: absolute;
+    z-index: 99;
+    background-color: #999999;
+}
+
+select {
+    border: 1px solid #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+textarea {
+    border: 1px solid #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    background-color: #FFFFFF;
+    padding: 0.25em;
+    color: #333333;
+}
+
+.divmod-table-body-button-container input[type=submit] {
+    background-color: #B894DB;
+    border: 3px double #E6DAF3;
+    color: #FFFFFF;
+    padding: 1px 7px 1px 7px;
+}
+
+input.create-account[type=submit][disabled] {
+    opacity: 0.5;
+}
+
+input[type=submit] {
+    border: 3px double #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #333333;
+    font-weight: bold;
+}
+
+input[type=password], input[type=text] {
+    border: 1px solid #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    padding: 0.25em;
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+button {
+    border: 3px double #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #333333;
+    font-weight: bold;
+}
+
+input.password-input, input.text-input {
+    border: 1px solid #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    padding: 0.25em;
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+.control-panel { width: 100% }
+
+.page-body {
+    vertical-align: top;
+}
+
+.fragment-container {
+    width: 100%
+}
+
+#mantissa-footer {
+    text-align: center;
+}
+
+body {
+    margin: 0px;
+    border: 0px;
+}
+
+.fragment-content { width: 100%; }
+
+/* navigation stuff */
+
+ul#mainmenu {
+    margin: 0;
+    padding: 0;
+}
+
+#mainmenu li.main:hover ul.submenu, #mainmenu li.over ul.submenu {
+    display: block;
+}
+
+div#nav {
+    clear: both;
+    margin-left: 2px;
+}
+
+#nav li.main {
+    text-align: center;
+}
+
+ul#mainmenu, ul.submenu {
+    list-style-type: none;
+}
+
+ul.submenu {
+    background: url(/Mantissa/images/dropdown.png) top left repeat-x;
+    border: 1px solid #E0E0E0;
+    border-top: 0;
+    display: none;
+    font-size: 0.8em;
+    left: 0;
+    margin-left: -1px;
+    padding: 5px 0 10px 0;
+    position: absolute;
+    width: 12em;
+    z-index: 2;
+    text-align: left;
+}
+
+li.main, li.current {
+    float: left;
+    font-size: 1.1em;
+    margin-top: 2px;
+    position: relative;
+    width: auto !important;
+    list-style-type: none;
+    width: 1%;
+}
+
+a.mainlink {
+    margin-left: 2px;
+}
+
+a.mainlink:link, a.mainlink:visited {
+    color: #FFFFFF;
+    display: block;
+    height: 14px;
+    padding: 2px 5px 2px 5px;
+    text-shadow: 2px 2px 1px #2A7DB3;
+    border: solid 1px #333333;
+}
+
+a.mainlink:hover, a.mainlink:active, a.mainlink:focus {
+    border: solid 1px #FFFFFF;
+    cursor: pointer;
+    text-shadow: none;
+}
+
+a.sellink {
+    margin-left: 2px;
+}
+
+a.sellink:link, a.sellink:visited, a.sellink:hover, a.sellink:active, a.sellink:focus {
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 14px;
+    padding: 2px 5px 2px 5px;
+    text-shadow: 2px 2px 1px #2A7DB3;
+    border: solid 1px #FFFFFF;
+}
+
+a.sublink:link, a.sublink:visited {
+    color: #3C3C3C;
+    display: block;
+    height: auto;
+    padding: 3px 4px;
+    width: 11.2em;
+}
+
+a.sublink:hover, a.sublink:active, a.sublink:focus {
+    background: #4CA1D8;
+    color: #FFFFFF;
+}
+
+#mainmenu li:hover a.mainlink, #mainmenu li.over a.mainlink {
+    border: solid 1px #FFFFFF;
+    text-shadow: none;
+}
+
+#submenubar a:link, #submenubar a:visited {
+    border: 0;
+    color: #656565;
+    display: block;
+    float: left;
+    height: 1.2em;
+    padding: 3px 10px;
+}
+
+a.childsellink {
+    font-weight: bold;
+}
+
+#submenubar a.childunsellink:hover, #submenubar a.childunsellink:active, #submenubar a.childunsellink:focus {
+    color: #FFFFFF;
+}
+
+
+#submenubar {
+    clear: both;
+    color: #FFFFFF;
+    height: 1.8em;
+    padding-left: 2px;
+    text-align: left;
+}
+
+#submenubar span {
+    color: #000000;
+    cursor: default;
+    font-weight: bold;
+}
+
+.mantissa-global-menubar {
+    background-image: url(/Mantissa/images/menubar-bg.png);
+    height: 2em;
+}
+
+.mantissa-application-menubar {
+    background-color: #44B4D9;
+}
+
+
+/* end of navigation stuff */
+
+/* These three li styles are for the admin site offering page.  They
+give installed offerings a different look from uninstalled offerings,
+including a visual hint that uninstalled offerings are clickable. */
+li.installed {
+    border: solid 1px green;
+    margin-top: 1px;
+}
+
+li.uninstalled {
+    border: solid 1px red;
+    margin-top: 1px;
+    cursor: crosshair;
+}
+
+li.installing {
+    border: dotted 1px yellow;
+    margin-top: 1px;
+    cursor: wait;
+}
+
+/* notifications */
+
+.install-succeeded {
+    position: absolute;
+    top: 100px; left: 100px;
+    background-color: green;
+}
+
+.install-failed {
+    position: absolute;
+    top: 100px; left: 100px;
+    background-color: red;
+}
+
+/* password reset */
+
+.password-reset-form .form-field-help {
+    font-size: 105%;
+    color: #999;
+    padding-top: 1em;
+}
+
+.password-reset h1 {
+    font-size: 125%;
+    color: #666;
+    padding: 2em;
+    padding-bottom: 0.5em;
+}
+
+.password-reset p {
+    font-size: 110%;
+    padding-left: 2.4em;
+}
+
+.password-reset a {
+    color: #44b4d9;
+    font-weight: bold;
+}
+
+.password-reset-form .divmod-table-header-left-block {
+    background-image: url(/Mantissa/images/password-reset-table-header-left-block.png);
+    background-repeat: no-repeat;
+    width: 153px;
+}
+
+.people-table-mugshot {
+    width: 66px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    float: left;
+}
+
+.people-table-spacer {
+    clear: left;
+    height: 1px;
+}
+
+.active-person-plugin-name, .person-plugin-name {
+    display: block;
+    float: left;
+    margin: 0px 6px 6px 0px;
+    padding: 6px 12px 6px 12px;
+}
+
+
+.person-plugin-name {
+    border: solid 1px #A0A0A0;
+}
+
+a.person-plugin-name:link, a.person-plugin-name:visited {
+    color: #A0A0A0;
+}
+
+.active-person-plugin-name {
+    border: solid 1px #000000;
+}
+
+a.active-person-plugin-name:link, a.active-person-plugin-name:visited {
+    color: #000000;
+}
+
+a.active-person-plugin-name:hover {
+    cursor: default;
+}

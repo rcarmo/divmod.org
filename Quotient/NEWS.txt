@@ -1,0 +1,313 @@
+0.3.0 (2009-09-25):
+  - Switch to `twisted.internet.ssl` from `epsilon.sslverify`.
+  - Delete some dead code.
+  - Update the quick start guide to reflect a more recent reality.
+  - Fix a bug when dismissing a compose view to return to an empty message
+    view which resulted in an unhandled error dialog.
+  - Use the new Twisted 8.2 MX lookup API which takes care of cleaning up
+    the UDP port itself.
+  - Avoid using private implementation details of LiveForm in the compose
+    page, fixing a bug in the process.
+  - Stop depending on or instantiating Scheduler or SubScheduler; instead
+    just adapt to IScheduler where necessary.
+  - Sort the contents of the tag list in the message detail view
+    alphabetically.
+
+0.2.19 (2008-08-12):
+  - Removed xquotient.indexinghelp.
+  - Updates to match new Mantissa API.
+
+0.2.9 (2008-02-19):
+  - The stylesheetLocation feature of XHTMLDirectoryTheme is now used
+    for Quotient's theme.
+
+0.2.8 (2007-10-16):
+  - Updates to match new Mantissa API.
+
+0.2.7 (2007-09-05):
+  - Mailbox rendering does not do message rendering now, hopefully preventing a
+    message detail rendering problem from making the mailbox inaccessible.
+  - Recipient autocomplete attempts to match email address hostnames now.
+
+0.2.6 (2007-08-01):
+  - Fixed a bug where message attachments with no sender headers weren't
+    rendered properly.
+  - Fixed a parsing bug for certain messages with message/rfc822 attachments.
+
+0.2.5 (2007-07-06):
+  - Fixed a bug where replies couldn't be made to messages with no Message-ID.
+  - Outgoing messages are now sent as text/plain only.
+
+0.2.4 (2007-06-06):
+  - message/rfc822 attachments now render inline.
+
+0.2.3 (2007-05-24):
+  - Draft editing now enabled.
+  - The new Postini header format is now parsed correctly.
+
+0.2.2 (2007-04-27):
+  - Message-status code improved so that status-manipulation methods
+    are not sensitive to call-ordering.
+  - Messages now received forwarded, replied, or redirected statuses
+    when a user takes these actions on it.
+  - Message detail actions UI is now in a separate fragment.
+  - Message detail action buttons are now removed from the printable
+    version of a message.
+  - Boomerang no longer appears when a message is deferred from the inbox.
+  - message/rfc822 attachments now appear with their correct sizes.
+  - HTML messages with long lines are now wrapped properly.
+  - The Compose widget now stops saving drafts after it's been removed
+    from the display.
+  - Content-Length header now set appropriately for attachment
+    downloads in Quotient.
+
+0.2.1 (2007-02-23):
+  - Selection and activation tracking has been moved out of
+    Quotient.Mailbox to Mantissa.Scrolltable.
+  - Autocomplete has been moved out of Quotient into Mantissa.
+  - In-Reply-To and References headers are now added to outgoing replies.
+  - Special Focus/Spam and Focus/Trash interaction has been
+    removed. Special Focus/Outgoing interaction has been added.
+  - 'Reply all' now adds additional recipients of the original message
+    to the recipient list of the reply.
+  - Outgoing message plaintext parts are now sent as format=flowed.
+  - Messages with invalidly encoded headers are no longer rejected.
+  - The different parts of a multipart/alternative message can now be
+    chosen for display.
+  - Resent-* headers are added in the proper order now.
+  - The message scrubber has been extended with more safe tags.
+
+0.2.0  (2007-01-23):
+  - Messages are now fulltext indexed on "to" addresses. The "sender" indexing
+    field has been renamed to "from", for consistency.
+  - Oldest-first sort order only applies to inbox and focus views now.
+
+0.1.30 (2007-01-11):
+  - Mail items are updated when they are deferred from the All view.
+  - "Reply all" CCs the message to the originall CC addresses.
+  - XML-illegal characters in messages are replaced wherever emails or email
+    source are rendered.
+  - A person widget is now shown for the value of the "to" field in the
+    message detail widget.
+  - The "more options" link is now a button.
+  - The spam help dialog UI has been improved.
+  - "From" header added to the message detail, with a person widget rendered
+    as the value.
+  - Batch message actions use the new query iterator API now, and have an
+    improved UI.
+  - The POP3 server uses the new query iterator API to reduce load on the rest
+    of the process.
+  - Related addresses for drafts/outgoing messages are now stored.
+  - "Drafts" is now an inbox view rather than a separate page.
+  - Issues with incorrect height and missing checkboxes in message rows in the
+    "Sent" view have been fixed.
+  - A bug in mailing list tagging has been fixed.
+  - The 4-space indent from the first line of the message source display has
+    been removed.
+  - Inbox tags can now be selected by clicking the tag in the message detail.
+  - The "Focus" inbox view has been added, for non-list, non-bulk precedence
+    messages.
+  - A correspondent relation has been added that is created from the
+    'Resent-To' header.
+
+0.1.29 (2006-12-18):
+  - Messages are listed oldest to newest in the inbox message list.
+  - The user's from addresses are excluded from the recipient list generated by
+    "reply all".
+  - Navigating back to a message after viewing its source is now possible.
+  - "Bounced" and "Outbox" views added. Messages due to be sent are visible in
+    Outbox; messages are placed in Sent after being successfully received by at
+    least one recipient. Messages for which all recipients bounced are placed
+    in the Bounced view.
+
+0.1.28 (2006-12-08):
+  - added BCC support
+  - "Reply all" added to "more actions" list.
+  - "Send" and "Save" buttons are disabled while sending or saving a draft.
+  - an "Archive" view showing messages that have been archived has been added.
+  - Person widgets or add person widgets are shown instead of plain email
+    addresses in the CC field of the message detail.
+  - Use multipart/mixed and application/octet-stream for unknown content types.
+  - Resized message frame width to exactly match size of message.
+  - Propagated Message deletion to the fulltext indexer so that documents
+    corresponding to deleted messages are removed from the index.
+  - Made deferred messages visible in "All" view.
+  - Made 'unarchive' work correctly from "All" and "Archived".
+  - Binary attachments are now encoded as base64 and text attachments as
+    quoted-printable.
+  - Inbox action buttons are now disabled while an action is in progress.
+
+0.1.27 (2006-11-22):
+  - Extensively refactored the message API to explicitly describe the Quotient
+    message pipeline and workflow, rather than leaving it defined by the behaviour of the inbox UI.
+
+0.1.26 (2006-11-20):
+  - Fixed bug with outgoing attachments which have container types (multipart/,
+    message/).
+
+0.1.25 (2006-11-17):
+  - Next-message preview fixed to show "No More Messages" consistently at the last message.
+  - Fixed issue where row heights would get progressively smaller when switching in and out
+    of the "sent" view.
+  - "Message source" and "Print" buttons moved to a "More Actions" dropdown menu, along with "Redirect".
+  - Bugfixes and better test coverage for compose autocompletion.
+  - Message preview sped up by retrieving less data upon message selection.
+
+0.1.24 (2006-11-08):
+  - Fixed issue where the subject header would be clobbered if an extra
+    newline is in the address field of the compose form.
+  - Fixed issue where messages delivered with stresssmtp would sometimes have
+    malformed headers.
+  - The "People" section of the inbox view filter works again.
+  - The message list view is now emptied and refilled whenever a batch action
+    is performed.
+  - The default Postini threshold is now 0.03.
+  - The Postini config form now preserves changes.
+  - Paperclip icon is now visible next to rows for messages that have
+    attachments.
+  - Fixed issue with out of order scrolltable row indices which was affecting
+    quotient group actions.
+  - Messages with no whitespace after the colon in a header are parsed
+    correctly now.
+
+0.1.23 (2006-10-31):
+  - Sorting in scrolltables now defaults to descending.
+  - A bug causing message font to be too big in complexity 3 has been fixed.
+  - <span> elements are now allowed in scrubbed HTML.
+
+0.1.22 (2006-10-21):
+  - Allow deletion of from addresses.
+  - The "Perform" button has been removed, and buttons that can act on multiple messages will.
+  - Escape message-preview subjects properly.
+  - Messages in the "Sent" view now show the address they were sent to.
+  - Message compose UI updated.
+
+0.1.21 (2006-10-17):
+  - Added cancellable 'add person' dialog.
+  - Reverted Scrolltable due to performance problems.
+
+0.1.20 (2006-10-10):
+  - Fixed bug where clicking on an account inthe account list wouldn't do anything.
+  - Better looking scrolltables.
+  - Fixed issue where urls aren't linked in the first message in the
+    scrolltable, and fixes direction of next message preview.
+
+0.1.19 (2006-10-05):
+  - Defer action has been fixed to use the actual deferral time.
+  - "No results" is shown if a search comes up empty.
+  - Filenames for attachment downloads have been improved.
+  - Alternate "from" addresses can now be set and chosen when composing a message.
+  - Times in the mailbox scrolltable are now formatted properly.
+
+0.1.18 (2006-09-29):
+  - Unarchive and undelete buttons have been added.
+  - Mailing list filtering is now a separate powerup from user-configured
+    rule filtering.
+
+0.1.17 (2006-09-26):
+  - Default format for message display is now HTML.
+  - View shortcut selector now actually selects things.
+  - Spam training/reply/forward fixed.
+
+0.1.16 (2006-09-20):
+  - Email address tooltips are shown on the names of message senders, if
+    they are not in the addressbook.
+  - Inbox view selection criteria are now handled in a single object.
+
+0.1.15 (2006-09-12):
+  - URLs in messages now open in a new window.
+  - Help text added to spam retrain/reclassify buttons.
+  - CID links are now removed from HTML messages.
+  - Various bugfixes and UI improvements.
+
+0.1.14 (2006-08-30):
+  - Refactored mailbox view.
+  - Various bug and UI fixes.
+
+0.1.13 (2006-08-22):
+  - Better IE support.
+
+0.1.12 (2006-08-14):
+  - The POP3 and SMTP servers give a more human-readable error message
+    when a username without a domain part is provided.
+  - The message detail now has a "More Detail" option.
+  - Postini headers are now recognized and users can choose to filter mail
+    based on them.
+  - The from-address used when sending mail through a smarthost can now be
+    set as a user preference, along with the port number of the smarthost.
+  - Attempting to display unparseable HTML now fails gracefully.
+  - The actions UI has been simplified.
+
+0.1.11 (2006-07-18):
+  - Spam group actions have been renamed and some message unread count bugs
+    have been fixed.
+  - 'axiomatic mail' has been added to configure the SMTP server; TLS/SSL
+    and SMTP auth are now available for sending mail.
+  - Inbox rendering has been simplified.
+
+0.1.10 (2006-07-17):
+  - Whitespace is now preserved properly in text/plain message parts.
+  - Bounce messages now contain more useful information.
+
+0.1.9 (2006-07-14):
+  - Messages with no subject now display as "<no subject>" instead of
+    "<Empty Subject>" or blank.
+  - Message-draft-saving code no longer continues to execute after compose
+    is dismissed.
+  - Users are now notified as a message is sent.
+  - A bug has been fixed in rendering messages with many levels of nested
+    quotes.
+  - Action buttons are now clickable anywhere on their surface and not just 
+    the text.
+
+0.1.8 (2006-07-11):
+  - New design for message detail.
+  - Person-adding works from message detail now.
+  - Search UI made to look better.
+  
+0.1.7 (2006-07-08):
+  - Fixed issue where switching messages in complexity 2 or 3 would reset the 
+    message body font size to the complexity 1 size.
+  - Fixed broken upgrader from last release.
+
+0.1.6 (2006-07-05):
+  - UI for attachments has been improved.
+  - HTML scrubbing and a "view original HTML" feature have been added.
+  - SMTP relaying for authenticated users is now supported.
+  - Archiving the last message now loads the previous message properly.
+  - Message counts are now calculated much faster.
+  - Use Nevow's new Element class instead of Fragment.
+  
+0.1.5 (2006-06-29):
+  - Fixed a bug causing the displayed message to be different from the 
+    highlighted message in the scrolltable.
+
+0.1.4 (2006-06-26):
+  - Initial mailbox rendering and scrolling through messages has been sped up.
+
+0.1.3 (2006-06-22):
+  - UI fixes: #1199, #1151, #1201, #1189
+
+0.1.2 (2006-06-20):
+  - "From" addresses ending in ".divmod.com" are now rewritten to
+    "divmod.com", for QA/testing purposes.
+  - Notification is now displayed when a draft is saved.
+  - Email messages are now searchable on sender and subject fields.
+
+0.1.1 (2006-06-16):
+  - Updated CSS
+  - A view for deferred messages has been added.
+  - Inbox queries have been sped up.
+  - Various cosmetic and bug fixes.
+
+0.1.0 (2006-06-12):
+  - Initial public release.
+
+    This system is still _HIGHLY_ experimental!  Use at your own risk.  The
+    only _supported_ use for it is deployment on the Divmod service, where we
+    can closely monitor, manage, and update it.
+
+    This release is simply to get Quotient integrated into the Divmod release
+    procedure and streamline the process for publishing future releases.  We do
+    not promise to provide even such basic support as database upgraders for
+    objects whose schema we change, yet.

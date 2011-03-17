@@ -1,0 +1,5 @@
+#!/usr/bin/python
+# Copyright 2007 Divmod, Inc.  See LICENSE file for details
+
+from epsilon.release import main
+main()

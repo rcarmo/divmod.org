@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Writing Mantissa SSH Services</title>
+  </head>
+  <body>
+    <h1>Writing Mantissa SSH Services</h1>
+
+    <h2>Introduction</h2>
+
+    <p>
+      Applications can expose terminal-based applications through Mantissa by
+      providing factories to interact with objects providing the
+      <code>twisted.conch.insults.insults.ITerminalTransport</code> interface.
+      These applications are restricted to clients with valid Mantissa
+      credentials and are published over an SSHv2 connection.
+    </p>
+
+    <p>
+      This document will explain how an application may plug in to this
+      functionality to offer terminal-based functionality to users.
+    </p>
+
+    <p>
+      Readers should familiarize themselves with the following concepts in
+      order to understand all sections of this document:
+    </p>
+
+    <ul>
+      <li>Zope Interfaces</li>
+      <li>Twisted Conch's Insults</li>
+      <li>Axiom Powerups</li>
+      <li>Mantissa Offerings</li>
+      <li>Mantissa Products</li>
+      <li>Mantissa Port Configuration</li>
+    </ul>
+
+    <h2>Interacting with Mantissa via SSH</h2>
+
+    <p>
+      A Mantissa server created in the usual way (that is, using <code
+      class="shell">axiomatic mantissa</code>) includes an SSH server.  You can
+      use <code class="shell">axiomatic port list</code> to find out what port
+      it is listening on (usually it will be 8022).  Once you determine the
+      port, connecting to the server is much like connecting to any other SSH
+      server.  If you're using the OpenSSH command line client, you'll do
+      something like this:
+
+      <pre class="shell">
+ssh -p 8022 admin@localhost@localhost
+</pre>
+
+      <code class="shell">admin@localhost@localhost</code> looks a little
+      strange, but it is necessary so that the full username the client uses to
+      log in is <code class="shell">admin@localhost</code>, while the host the
+      client connects to is <code class="shell">localhost</code>.  A future
+      version of Mantissa may allow defaults for the domain part of a username,
+      changing this to just <code class="shell">admin@localhost</code>.
+    </p>
+
+    <h2>Developing Terminal Applications</h2>
+
+    <p>
+      Applications provide terminal-based functionality by writing a powerup
+      which can create new
+      <code>twisted.conch.insults.insults.ITerminalProtocol</code> for
+      connections made to the server.  Connections are first authenticated,
+      then some policy is used to select a particular
+      <code>ITerminalServerFactory</code> to use to create a new
+      <code>ITerminalProtocol</code> provider to interact with the connection.
+      Mantissa includes an implementation of a policy which presents clients
+      with a menu to select from all available
+      <code>ITerminalServerFactory</code> powerups.  Potential powerups are
+      presented to the user based on their <code>name</code> attribute, so
+      application authors should try to select a value for this attribute which
+      is descriptive enough for users to make a decision in this context.
+    </p>
+
+    <p>
+      Aside from the <code>name</code> attribute,
+      <code>ITerminalServerFactory</code> defines only
+      <code>buildTerminalProtocol</code>.  This is similar to the
+      <code>buildProtocol</code> method of a server factory.  The returned
+      <code>ITerminalProtocol</code> will be connected to a
+      <code>ITerminalTransport</code> and then may behave in any way which
+      suits the application.
+    </p>
+
+    <a href="listings/terminal/factory.py">Terminal powerup</a>
+
+    <p>
+      <code>NoOpFactory</code> describes itself with the <code>name</code>
+      attribute as a <q>no-op example</q> and returns an instance of
+      <code>twisted.conch.insults.insults.TerminalProtocol</code> from its
+      <code>buildTerminalProtocol</code> method.  <code>TerminalProtocol</code>
+      is analogous to <code>twisted.internet.protocol.Protocol</code> - it is a
+      base implementation which ignores all input and creates no output.
+    </p>
+
+    <p>
+      If a user store is powered up with <code>NoOpFactory</code> and the site
+      store is configured with an SSH server, that user will be able to connect
+      to the server via SSH, select the <q>no-op example</q>, and interact send
+      bytes (which will be ignored) to a <code>TerminalProtocol</code>.
+    </p>
+
+    <h2>Limitations</h2>
+
+    <p>
+      Only password authentication (ie, not key-based authentication) is
+      supported in the current implementation.
+    </p>
+
+    <p>
+      The server's host key is stored in the site store as an attribute of the
+      <code class="API">xmantissa.terminal.SecureShellConfiguration</code>
+      item.  There is not yet a friendly user interface for changing it;
+      however, it may be edited directly (for example, using <code
+      class="shell">axiomatic browse</code>).
+    </p>
+
+   </body>
+</html>

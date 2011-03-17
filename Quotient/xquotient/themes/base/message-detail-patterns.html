@@ -1,0 +1,140 @@
+<nevow:invisible xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7">
+
+  <tr nevow:pattern="redirected-from">
+    <td class="msg-detail-field-name">Resent From:</td>
+    <td class="msg-detail-field-body"><nevow:slot name="address" /></td>
+  </tr>
+
+  <a href="#"
+    onclick="return Quotient.Message.MessageDetail.get(this).dom_chooseTag(this)"
+    nevow:pattern="tag"
+    class="tag"
+    ><nevow:slot name="name" /></a>
+
+  <tr nevow:pattern="redirected-to">
+    <td class="msg-detail-field-name">Resent To:</td>
+    <td class="msg-detail-field-body"><nevow:slot name="address" /></td>
+  </tr>
+
+  <div nevow:pattern="scrubbed-dialog" class="scrubbed-dialog">
+    Message HTML has been modified for your safety.
+    <a href="#"
+      onclick="Quotient.Message.MessageDetail.get(this).showOriginalHTML(); return false"
+      >Show original HTML</a>.
+  </div>
+
+  <a nevow:pattern="ziplink">
+    <nevow:attr name="href"><nevow:slot name="url" /></nevow:attr>
+    Download All
+  </a>
+
+  <tr nevow:pattern="attachment-panel" class="attachment-panel" valign="top">
+    <td class="msg-detail-field-name">
+      <span onclick="Quotient.Common.CollapsiblePane.toggle(this, '', this.parentNode.parentNode)"
+        style="cursor: pointer">
+        <img class="collapse-arrow" src="/static/Quotient/images/outline-collapsed.png" />
+        <img src="/static/Quotient/images/paperclip.png" />
+      </span>
+    </td>
+    <td>
+      <nevow:slot name="count" />
+      <nevow:slot name="description" /> -
+      <nevow:slot name="size" />
+
+      <nevow:slot name="ziplink" />
+      <div class="pane-body" style="position: absolute; top: -1000px; left: -1000px;">
+        <nevow:slot name="attachments" />
+      </div>
+    </td>
+  </tr>
+
+  <div nevow:pattern="cc">
+    CC: <nevow:slot name="cc" />
+  </div>
+
+  <span nevow:pattern="cc-address" style="margin-right: 4px">
+    <nevow:slot name="cc" />
+  </span>
+
+  <tr style="display: none" class="detailed-row" nevow:pattern="cc-detailed">
+    <td class="msg-detail-field-name">CC:</td>
+    <td class="mesg-detail-header-body"><nevow:slot name="cc" /></td>
+  </tr>
+
+  <div nevow:pattern="message-source-link" align="right" style="clear: both">
+    (<a href="#" onclick="Quotient.Message.MessageDetail.get(this).messageSource(); return false">Message Source</a>)
+  </div>
+
+  <a class="printable-link" nevow:pattern="printable-link" style="display: none"
+    onclick="Quotient.Message.MessageDetail.get(this).printable(this); return false"
+    ><nevow:attr name="href"><nevow:slot name="link" /></nevow:attr></a>
+
+  <nevow:invisible nevow:pattern="paragraphs">
+    <div class="text-paragraph" nevow:pattern="paragraph">
+      <nevow:attr name="class"><nevow:slot name="quote-class" /></nevow:attr>
+      <nevow:slot name="content" />
+    </div>
+    <nevow:slot name="content" />
+  </nevow:invisible>
+
+  <iframe id="content-iframe" nevow:pattern="content-iframe" frameborder="0" style="width: 100%"
+    onload="Quotient.Common.Util.resizeIFrame(this)">
+    <nevow:attr name="src"><nevow:slot name="location" /></nevow:attr>
+  </iframe>
+
+  <nevow:invisible nevow:pattern="content-type">
+    (<i><nevow:slot name="type" /></i>)
+  </nevow:invisible>
+
+  <div nevow:pattern="attachment" class="attachment" style="text-align: center">
+    <a><nevow:attr name="href"><nevow:slot name="location" /></nevow:attr>
+      <img border="0"><nevow:attr name="src"><nevow:slot name="icon" /></nevow:attr></img><br />
+      <nevow:slot name="filename" /> <nevow:slot name="type" /></a> <nevow:slot name="size" />
+  </div>
+
+  <div class="image-attachment" nevow:pattern="image-attachment">
+    <a rel="lightbox">
+      <nevow:attr name="href"><nevow:slot name="location" /></nevow:attr>
+      <img><nevow:attr name="src"><nevow:slot name="thumbnail-location" /></nevow:attr></img>
+    </a><br />
+  </div>
+
+  <a nevow:pattern="read-message-link" href="#">
+    <nevow:attr name="onclick"><nevow:slot name="onclick" /></nevow:attr>
+    <nevow:slot name="subject" />
+  </a>
+
+  <a nevow:pattern="unread-message-link" style="font-weight: bold" href="#">
+    <nevow:attr name="onclick"><nevow:slot name="onclick" /></nevow:attr>
+    <nevow:slot name="subject" />
+  </a>
+
+  <span nevow:pattern="no-prev-message">
+    Previous Message
+  </span>
+
+  <a nevow:pattern="prev-message-link">
+    <nevow:attr name="href"><nevow:slot name="location" /></nevow:attr>
+    Previous Message
+  </a>
+
+  <span nevow:pattern="no-next-message">
+    Next Message
+  </span>
+
+  <a nevow:pattern="next-message-link">
+    <nevow:attr name="href"><nevow:slot name="location" /></nevow:attr>
+    Next Message
+  </a>
+
+  <span nevow:pattern="no-next-unread-message">
+    Next Unread Message
+  </span>
+
+  <a nevow:pattern="next-unread-message-link">
+    <nevow:attr name="href"><nevow:slot name="location" /></nevow:attr>
+    Next Unread Message
+  </a>
+
+</nevow:invisible>

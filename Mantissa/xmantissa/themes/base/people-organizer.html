@@ -1,0 +1,69 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveElement"
+  xmlns:athena="http://divmod.org/ns/athena/0.7"
+  class="people-organizer">
+  <div id="organizer">
+    <div class="people-table-container">
+      <div class="people-table">
+        <table class="people-table-header" cellpadding="0" cellspacing="0">
+          <tr valign="center">
+            <td class="people-table-filter-col-header">
+              <img id="filter-throbber" style="display: none" src="/Mantissa/images/circle-throbber.gif" />
+              Filter
+            </td>
+            <td class="people-table-list-col-header">
+              People
+              <a href="#"><athena:handler event="onclick" handler="displayAddPerson" />Add</a>
+              /
+              <a href="#"><athena:handler event="onclick" handler="displayImportPeople" />Import</a>
+            </td>
+            <td>
+              Person
+              <a id="edit-link" style="display: none" href="#">
+                <athena:handler event="onclick" handler="dom_displayEditPerson" />
+                Edit
+              </a>
+              <a id="delete-link" style="display: none" href="#">
+                <athena:handler event="onclick" handler="dom_deletePerson" />
+                Delete
+              </a>
+            </td>
+          </tr>
+        </table>
+        <div class="people-table-filter-cell">
+          <nevow:invisible nevow:render="peopleFilters">
+            <a id="default-filter" nevow:pattern="selected-filter" href="#" class="people-table-selected-filter"
+              ><athena:handler event="onclick" handler="dom_filterByFilter" /><nevow:slot name="name" /></a>
+            <a nevow:pattern="filter" href="#" class="people-table-filter"
+              ><athena:handler event="onclick" handler="dom_filterByFilter" /><nevow:slot name="name" /></a>
+          </nevow:invisible>
+        </div>
+        <div class="people-table-list-cell" id="people-list">
+          <nevow:invisible nevow:render="peopleTable" />
+        </div>
+        <div class="people-table-person-cell" id="person-cell">
+          <div class="people-table-person-container">
+            <table style="width: 100%">
+              <tr>
+                <td align="right">
+                  <a id="cancel-form-link" class="cancel-form-link" style="display: none" href="#">
+                    <athena:handler event="onclick" handler="dom_cancelForm" />
+                    <img src="/Mantissa/images/delete.png" />
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img id="person-widget-throbber"
+                    style="display: none"
+                    src="/Mantissa/images/circle-throbber.gif" />
+                  <div id="detail"></div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

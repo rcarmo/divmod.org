@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>
+      Statistics Reporting and Collection
+    </title>
+  </head>
+  <body>
+    <h1>Statistics Reporting and Collection</h1>
+
+    <h2>Introduction</h2>
+
+    <p>
+      Mantissa includes a way to report simple string data to external
+      processes roughly in real time.  This system is used internally to expose
+      certain statistics which may be relevant for performance and optimization
+      investigations.  Applications can contribute similar statistics to be
+      reported in the same way.  Custom observers for this information can also
+      be written.
+    </p>
+
+    <p>
+      This document will explain how to report such information.  It will also
+      explain how to write a client which can be connected to a Mantissa server
+      to receive this information.
+    </p>
+
+    <p>
+      Readers should familiarize themselves with the following concepts in
+      order to understand all sections of this document:
+    </p>
+
+    <ul>
+      <li>Zope Interfaces</li>
+      <li>Twisted Logging</li>
+      <li>Twisted TCP clients</li>
+      <li>AMP Authentication</li>
+      <li>AMP Routes</li>
+      <li>Axiom Powerups</li>
+      <li>Mantissa Port Configuration</li>
+    </ul>
+
+    <h2>Reporting Events</h2>
+
+    <p>
+      <code>twisted.python.log.msg</code> is used to report events which
+      Mantissa will publish to clients.  The only requirement is that the
+      <code>"interface"</code> key have a value of <code
+      class="API">axiom.iaxiom.IStatEvent</code>.  For example, a blogging
+      application might want to report each new blog post.  To do this, in the
+      blog post handling code, this code would be included:
+    </p>
+
+    <pre class="python">
+from twisted.python.log import msg
+from axiom.iaxiom import IStatEvent
+
+msg(interface=IStatEvent, new_blog_post=1)
+    </pre>
+
+    <p>
+      It is left up to observers how this data is interpreted.  Almost any keys
+      or values are allowed.  The primary restriction on keys is that they are
+      not already used by the logging system itself.  For example,
+      <code>"message"</code> is reserved for the value of the first positional
+      argument to <code>twisted.python.log.msg</code>, so a stat event cannot
+      use it.  Values are restricted to objects which can be represented as
+      unicode strings.
+    </p>
+
+    <h2>Stat Observers</h2>
+
+    <h3>Server Configuration</h3>
+
+    <p>
+      Observation of reported statistics is done using an AMP client.  The
+      client connects to and authenticates with a Mantissa server.  The server
+      must have an AMP port configured and the user must have the <code
+      class="API">xmantissa.stats.RemoteStatsCollectorFactory</code> powerup
+      installed in order to observe stats.  The Mantissa administrative
+      offering (not installed by default) provides this powerup.
+    </p>
+
+    <h3>Stats Route and StatUpdate Command</h3>
+
+    <p>
+      A stats route is made accessible via the
+      <code>u"http://divmod.org/ns/mantissa-stats"</code> protocol.  Once the
+      route is set up, the server will send <code>StatUpdate</code> commands to
+      the client until it disconnects.  The <code>StatUpdate</code> command has
+      one parameter, <code>data</code>.  The value for the parameter is an
+      encoded list of AMP boxes.  Each box has two keys, <code>key</code> and
+      <code>value</code>, each of which is associated with one part of keyword
+      argument to the corresponding <code>msg</code> call.  Additionally, there
+      is an element including a timestamp for the event.  For example, the
+      <code>msg</code> call in the blog post example above would results in
+      <code class="python">[{u'key': u'time', u'value': u'1224183617.916481'},
+      {u'key': u'new_blog_post', u'value': u'1'}]</code>.  The ordering of the
+      list is arbitrary.
+    </p>
+
+  </body>
+</html>
+

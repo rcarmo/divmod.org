@@ -1,0 +1,16 @@
+
+See: http://mathworld.wolfram.com/Mantissa.html
+     http://www.nuvisionmiami.com/books/asm/workbook/floating_tut.htm
+
+
+In computer science, mantissa is the component of a floating-point number that
+denotes the value of the number witout its order of magnitude.
+
+Divmod Mantissa is an application server.  It is named for the floating-point
+mantissa because it is the container for the "value" portion of an application.
+This is explicitly linked to Divmod's other, proprietary project that has
+parity with Mantissa, called "Exponent", which provides increased power for
+Mantissa applications, by providing facilities for scaling and failover.
+
+(The X on the package name is a temporary artifact of code migration, and will
+be removed soon.)

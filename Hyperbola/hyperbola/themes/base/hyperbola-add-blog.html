@@ -1,0 +1,32 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  nevow:render="liveElement">
+  <h1>Add Blog</h1>
+  <form class="hyperbola-form" onsubmit="Nevow.Athena.Widget.get(this).submit(); return false">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <label for="title">Title</label>
+          </td>
+          <td>
+            <input type="text" name="title" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="description">Description</label>
+          </td>
+          <td>
+            <textarea name="description" rows="3" cols="30"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="right">
+            <input type="submit" value="Add Blog" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

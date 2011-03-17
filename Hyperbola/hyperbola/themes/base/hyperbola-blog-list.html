@@ -1,0 +1,16 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveElement">
+  <h1>Blogs</h1>
+  <ul nevow:render="blogs">
+    <li nevow:pattern="blog">
+      <h2>
+        <a>
+          <nevow:attr name="href"><nevow:slot name="link" /></nevow:attr>
+          <nevow:slot name="title" />
+        </a>
+      </h2>
+      <a><nevow:attr name="href">javascript:if(navigator.userAgent.indexOf('Safari') >= 0){Q=getSelection();}else{Q=document.selection?document.selection.createRange().text:document.getSelection();}; var d = window.open('<nevow:slot name="post-url" />?body='+encodeURIComponent(Q)+'&amp;url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title), null, "height=480,width=750,top=10,left=10"); setTimeout(function() { d.focus() }, 300); undefined;</nevow:attr>Post Bookmarklet</a>
+    </li>
+  </ul>
+</div>

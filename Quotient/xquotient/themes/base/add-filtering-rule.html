@@ -1,0 +1,19 @@
+<form xmlns:nevow="http://nevow.com/ns/nevow/0.1" xmlns:athena="http://divmod.org/ns/athena/0.7" nevow:render="liveElement">
+  <athena:handler event="onsubmit" handler="submit" />
+  If <input type="text" name="headerName" />
+  <select name="negate">
+    <option value="does">does</option>
+    <option value="doesn't">doesn't</option>
+  </select>
+  <select name="operation">
+    <option value="equals">equal</option>
+    <option value="startswith">start with</option>
+    <option value="endswith">end with</option>
+    <option value="contains">contain</option>
+  </select>
+  <input type="text" name="value" />,
+  (Short circuit: <input type="checkbox" name="shortCircuit" />
+  Case sensitive: <input type="checkbox" name="caseSensitive" />)
+  tag the message with <input type="text" name="tagName" />.
+  <nevow:invisible nevow:render="submitbutton" />
+</form>

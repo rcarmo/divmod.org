@@ -1,0 +1,250 @@
+###file:_Project_/README.txt
+
+Document your project here!
+
+###file:_Project_/NEWS.txt
+
+0.0.1 (_date_):
+  - Initial Release
+
+###file:_Project_/_project_/__init__.py
+# Don't put code here.
+from _project_._version import version
+
+###file:_Project_/_project_/_version.py
+# This is an auto-generated file. Use release automation software to update.
+from twisted.python import versions
+version = versions.Version(__name__[:__name__.rfind('.')], 0, 0, 1)
+
+###file:_Project_/_project_/_project__model.py
+from zope.interface import implements
+from axiom.item import Item, InstallableMixin
+from axiom.attributes import text, bytes, integer, reference, timestamp
+
+from xmantissa import ixmantissa, website, webapp, webnav
+
+from twisted.python.components import registerAdapter
+
+from epsilon.extime import Time
+
+from _project_._project__view import _Project_View, _Project_PublicView
+
+class _Project_Benefactor(Item):
+    '''i am responsible for granting priveleges to avatars,
+       which equates to installing stuff in their store'''
+    implements(ixmantissa.IBenefactor)
+
+    typeName = '_project__benefactor'
+    schemaVersion = 1
+
+    # Number of users this benefactor has endowed
+    endowed = integer(default = 0)
+
+    def installOn(self, other):
+        other.powerUp(self, ixmantissa.IBenefactor)
+
+    def endow(self, ticket, avatar):
+        self.endowed += 1
+        # The user will be able to access the application using the
+        # HTTP Protocol
+        avatar.findOrCreate(website.WebSite).installOn(avatar)
+
+        # The user will be able to use private applications written for
+        # Mantissa and installed in his substore.
+        avatar.findOrCreate(webapp.PrivateApplication).installOn(avatar)
+
+        # Install this new application in the user substore (avatar) so that
+        # he will be able to use it.
+        avatar.findOrCreate(_Project_Start).installOn(avatar)
+
+    def deprive(self, ticket, avatar):
+        app = avatar.findFirst(_Project_Start)
+        app.deleteFromStore()
+
+class _Project_Start(Item, InstallableMixin):
+    # This object can be browsed from the web
+    # From the mantissa perspective this is the model in the MVC pattern
+    implements(ixmantissa.INavigableElement)
+
+    schemaVersion = 1                  # First version of this object.
+    typeName = '_project__start'       # Database table name.
+
+    name = text()               # We must have at least one attribute - model
+                                # objects must store data.
+    installedOn = reference()
+
+    def installOn(self, other):
+        super(_Project_Start, self).installOn(other)
+        other.powerUp(self, ixmantissa.INavigableElement)
+
+    def getTabs(self):
+        return [webnav.Tab('_Project_', self.storeID, 0)]
+
+    def explode(self):
+        raise Exception('these should fail until you write some tests!')
+
+# Notify the system that this Fragment class will be responsible of
+# rendering the model. The 'self.original' attribute of the _Project_View
+# instance is actually an instance of the _Project_Start class.
+registerAdapter(_Project_View, _Project_Start, ixmantissa.INavigableFragment)
+
+class _Project_PublicPage(Item, InstallableMixin):
+    # This object can be browsed from the web by anyone, including
+    # unauthenticated users
+    implements(ixmantissa.IPublicPage)
+
+    schemaVersion = 1
+    typeName = '_project__public_page'
+
+    installedOn = reference()
+
+    def installOn(self, other):
+        super(_Project_PublicPage, self).installOn(other)
+        other.powerUp(self, ixmantissa.IPublicPage)
+
+    def getResource(self):
+        return _Project_PublicView(original=self, staticContent=ixmantissa.IStaticShellContent(self.installedOn, None))
+
+###file:_Project_/_project_/_project__view.py
+from zope.interface import implements
+
+from twisted.python import util
+
+from nevow import static, loaders, rend
+
+from xmantissa import ixmantissa, publicresource
+
+class _Project_View(rend.Fragment):
+    # This is a Fragment of a Page
+    implements(ixmantissa.INavigableFragment)
+
+    # This View will use the _project_-start.html template
+    fragmentName = '_project_-start'
+
+    # We won't use LivePage or Athena
+    live = False
+
+    def head(self):
+        # Add tags in the page <head>
+        pass
+
+class _Project_PublicView(publicresource.PublicPage):
+    def __init__(self, original, staticContent, **kwargs):
+        templateContent = loaders.xmlfile(util.sibpath(__file__, "static/html/index.html"))
+        super(_Project_PublicView, self).__init__(
+            original=original,
+            staticContent=staticContent,
+            fragment=templateContent,
+            forUser=None,
+            **kwargs)
+
+    def child_static(self, ctx):
+        return static.File(util.sibpath(__file__, 'static'))
+
+###file:_Project_/_project_/test/__init__.py
+# Don't put code here.
+
+###file:_Project_/_project_/test/test__project_.py
+from axiom.store import Store
+
+from twisted.trial import unittest
+from _project_ import _project__model
+
+class BasicTest(unittest.TestCase):
+    def setUp(self):
+        self.store = Store()
+
+    def testUserWroteTests(self):
+        o = _project__model._Project_Start(
+            store=self.store,
+            name=u'Test Object')
+        self.assertEquals(1, 0)
+        o.explode()
+
+    def tearDown(self):
+        self.store.close()
+
+###file:_Project_/axiom/plugins/_project_cmd.py
+from axiom.scripts import axiomatic
+
+class _Project_Command(axiomatic.AxiomaticCommand):
+    name = '_project_'
+
+    description = '_Project_ command that must be edited to be useful'
+
+    # Optional command line parameters can be added using this list.
+    optParameters = []
+
+    # This is the method called after all the parameters have been parsed and
+    # should contain the plugin logic. Unless you need to open new ports or
+    # install powerups in the main store you won't need to edit this.
+    def postOptions(self):
+        pass
+
+###file:_Project_/_project_/static/_project_.css
+
+###file:_Project_/_project_/static/_project_.js
+
+###file:_Project_/_project_/_project__theme.py
+from xmantissa import webtheme
+from nevow import tags
+
+class _Project_Theme(webtheme.XHTMLDirectoryTheme):
+    def head(self, website):
+        root = website.cleartextRoot()
+        static = root.child('_Project_').child('static')
+        yield tags.link(
+            href=static.child('_project_.css'),
+            rel='stylesheet',
+            type='text/css')
+
+
+###file:_Project_/xmantissa/plugins/_project__theme.py
+from _project_._project__theme import _Project_Theme
+_project__theme = _Project_Theme('base', 0)
+
+###file:_Project_/xmantissa/plugins/_project_off.py
+from axiom import iaxiom, userbase
+
+from xmantissa import website, offering, provisioning
+
+import _project_
+
+from _project_ import _project__model
+
+_project_er = provisioning.BenefactorFactory(
+    name = u'_project_er',
+    description = u'A wonderful ready to use application named _Project_',
+    benefactorClass = _project__model._Project_Benefactor)
+
+plugin = offering.Offering(
+    name = u"_Project_",
+
+    description = u"""
+    This is the wonderful _Project_ application. Click me to install.
+    """,
+
+    siteRequirements = (
+        (userbase.IRealm, userbase.LoginSystem),
+        (None, website.WebSite)),
+
+    appPowerups = (
+        _project__model._Project_Start,
+        _project__model._Project_PublicPage,
+    ),
+
+    benefactorFactories = (_project_er,),
+    loginInterfaces = [],
+    themes = []
+    )
+
+###file:_Project_/_project_/themes/base/_project_-start.html
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+    Welcome to the _Project_ Application
+</div>
+
+###file:_Project_/_project_/static/html/index.html
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+    Welcome to the _Project_ Application public page
+</div>

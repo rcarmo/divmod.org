@@ -1,0 +1,25 @@
+0.3.0 (2009-11-25):
+  - Various test suite improvements.
+  - Some dead code removed.
+  - Deprecate `IPreauthCredentials`.
+  - Use Mantissa's static web content feature for CSS and JavaScript.
+  - Provide a version plugin to allow Axiom to record version information
+    about the Sine scheme.
+  - Some SIP protocol implementation bugs fixed (particularly to do with
+    rport handling).
+
+0.2.0 (2007-01-23):
+  - Updated to work with new Axiom dependency API.
+
+0.1.4 (2006-09-26):
+  - Fixed a bug in placeCall that prevented PSTN-to-PSTN calls from completing.
+
+0.1.3 (2006-09-20):
+  - Fixed a case where errors would get swallowed in stateless proxy
+    processing instead of generating an error response.
+
+0.1.2 (2006-06-22):
+  - Updated placeCall to work with current Axiom.
+
+0.1.0 (2006-06-12):
+  - Initial public release.

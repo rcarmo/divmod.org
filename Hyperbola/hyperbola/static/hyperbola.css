@@ -1,0 +1,156 @@
+.hyperbola-form label {
+    font-weight: bold;
+}
+
+.hyperbola-blog .scroll-row:hover .scroll-cell {
+    background-color: #FFFFFF;
+}
+
+.hyperbola-blog .scroll-cell {
+    border-width: 0px;
+}
+
+.hyperbola-section-heading {
+    color: #444444;
+    font-weight: bold;
+}
+
+.hyperbola-add-comment-dialog {
+    padding: 8px;
+}
+
+.hyperbola-section-column {
+    border-right: solid 5px #E2E2E2;
+    padding: 0px 8px 0px 200px;
+    margin-right: 60px;
+}
+
+.selected-tag {
+    background-color: #80ABCD;
+}
+
+.hyperbola-section-column > div {
+    margin: 2px;
+}
+
+.selected-tag:link, .selected-tag:visited {
+    color: #FFFFFF;
+}
+
+.hyperbola-tag-completions {
+    border: solid 1px #000000;
+    background-color: #FFFFFF;
+    padding: 2px;
+    overflow: hidden;
+    font-size: 1.1em;
+}
+
+.hyperbola-tag-completions .selected-completion {
+    background-color: #7FCCE5;
+}
+
+.hyperbola-tag-completions > div {
+    padding: 4px;
+}
+
+.hyperbola-blurb, .hyperbola-add-comment {
+    font-family: verdana, helvetica, sans-serif;
+}
+
+.hyperbola-add-post-form {
+    margin-top: 6px;
+}
+
+.hyperbola-blurb-body {
+    text-align: left;
+}
+
+.hyperbola-blog, .hyperbola-blog-post-detail {
+    border: solid 1px #000000;
+    padding: 20px 60px 20px 20px;
+}
+
+.hyperbola-blog-main-title {
+    font-size: 140%;
+    color: #005599;
+    font-weight: bold;
+}
+
+.hyperbola-blog-sub-title {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hyperbola-blog-post-title {
+    background-color: #ECECEC;
+    color: #005599;
+    padding: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.hyperbola-blog-post-date {
+    float: right;
+    color: #000000;
+    font-weight: normal;
+}
+
+.hyperbola-blog-post-title {
+    margin: 6px 0px 2px 0px;
+}
+
+.hyperbola-blog-post-metadata {
+    margin-bottom: 6px;
+}
+
+.hyperbola-blog-post-content > .hyperbola-blurb-body {
+    margin: 6px 0px 8px 2px;
+}
+
+.hyperbola-blog-post-links {
+    text-align: right;
+}
+
+.hyperbola-blurb a {
+    text-decoration: underline;
+}
+
+.hyperbola-blurb a:link {
+    color: #4E80B6;
+}
+
+.hyperbola-blurb a:visited {
+    color: #4E80B6;
+}
+
+.hyperbola-blog-comment > .hyperbola-blurb-body {
+    background-color: #EEEEEE;
+    padding: 6px;
+}
+
+.hyperbola-comment-date {
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.hyperbola-blog-post-comments-header {
+    font-weight: bold;
+}
+
+.hyperbola-add-comment-title {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.hyperbola-add-comment label {
+    color: #555555;
+    font-weight: normal;
+}
+
+.hyperbola-no-child-blurbs {
+    font-weight: bold;
+}
+
+.hyperbola-edit-blog-post {
+    margin-left: 10px;
+}

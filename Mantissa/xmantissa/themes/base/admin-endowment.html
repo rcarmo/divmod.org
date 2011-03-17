@@ -1,0 +1,15 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+  <form xmlns:athena="http://divmod.org/ns/athena/0.7"
+        nevow:render="liveFragment"
+        action="#"
+        onsubmit="Mantissa.Offering.SingleEndowment.get(this).formSubmitted(); return false;">
+    <fieldset class="username-fieldset" style="display: none;">
+      <input type="text" name="username" />
+      <input type="submit" value="Select" />
+    </fieldset>
+    <fieldset class="factory-fieldset" style="display: none;">
+      <nevow:invisible nevow:render="benefactorFactories" />
+      <input type="button" value="Endow" onclick="Mantissa.SingleEndowment.get(this).endow(); return false;" />
+    </fieldset>
+  </form>
+</div>

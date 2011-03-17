@@ -1,0 +1,269 @@
+0.6.0 (2009-11-25):
+  - Speed up creation, insertion, and various other operations on Item by
+    optimizing Item.getSchema.
+  - Improve error reporting from the batch upgrade system.
+  - Speed up setting attributes on Item instances.
+  - Remove the batch process manhole service.
+  - Improve the reliability of some unit tests.
+  - Fix `axiomatic --reactor ...`.
+  - Remove invalid SQL normalization code which would occassionally corrupt
+    certain obscure but valid SQL statements.
+  - Add an in-memory `IScheduler` powerup for stores and substores.
+
+0.5.31 (2008-12-09):
+  - An IStatEvent is now logged when a store is opened.
+  - Different schema versions of the same item type now no longer
+    compare equal, which fixes some breakage in the upgrade system,
+    among other things.
+  - Significantly reduce the runtime cost of opening a store by
+    reducing the amount of work spent to verify schema correctness.
+
+0.5.30 (2008-10-15):
+  - Fixed a _SubSchedulerParentHook bug where a transient run failure
+    would cause future event scheduling in the relevant substore to
+    fail/traceback.
+
+0.5.29 (2008-10-02):
+  - Added 'requiresFromSite' to axiom.dependency, expressing a
+    requirement on the site store for the successful installation of
+    an item in a user store.
+  - Made errors from duplicate item type definition friendlier.
+
+0.5.28 (2008-08-12):
+  - Upgraders can now safely upgrade reference attributes.
+  - The batch process is no longer started unless it's needed.
+  - Removed use of private Decimal APIs that changed in Python 2.5.2.
+
+  - "axiomatic start" changed to use the public interface to twistd's
+    behaviour instead of relying on internal details.
+  - Store now uses FilePaths to refer to its database or files directory.
+  - Automatic powerup discovery is now a feature of powerups rather
+    than of axiom.dependency.
+  - Stores now record the released versions of code used to open them.
+  - "axiomatic upgrade" added, a command for completely upgrading a store.
+  - Removed no-longer-working APSW support code.
+
+0.5.27 (2007-11-27):
+  - Substores and file storage for in-memory stores are now supported.
+
+0.5.26 (2007-09-05):
+  - A bug where exceptions were raised when tables were created concurrently is
+    now fixed.
+
+0.5.25 (2007-08-01):
+  - Added the beginnings of a query introspection API.
+
+0.5.24 (2007-07-06):
+  - Added a 'postCopy' argument to
+    upgrade.registerAttributeCopyingUpgrader, a callable run
+    with the new item after upgrading.
+
+0.5.23 (2007-06-06):
+  - Fixed a bug where user store insertion/extraction failed if a
+    SubScheduler was installed but no TimedEvents existed.
+
+0.5.22 (2007-05-24):
+  - Fixed docstrings in axiom.dependency.
+  - Scheduler and SubScheduler now declared to implement IScheduler.
+
+0.5.21 (2007-04-27):
+  - Multi-version upgraders are now supported: an upgrader function
+    can upgrade items more than a single version at a time.
+  - Multi-item-class queries now supported: Store.query takes a tuple
+    as its first argument, similar to a comma-separated column clause
+    for a SELECT statement in SQL.
+  - Empty textlists are now properly distinguished from a textlist
+    containing a single empty string.
+  - Handling of items scheduled to run with axiom.scheduler being
+    deleted before they run has been fixed.
+
+0.5.20 (2007-02-23):
+  - AxiomaticCommand is no longer itself an axiom plugin.
+  - axiom.test.historic.stubloader.StubbedTest now has an
+    'openLegacyStore' method, for opening the unupgraded store
+    multiple times.
+  - The default argument to Store.getItemByID is now respected in the
+    case where an attempt is made to load an item which was created
+    and deleted within a single transaction.
+
+0.5.19 (2007-01-11):
+  - A new method, axiom.store.ItemQuery.paginate, has been added, which splits
+    a query's result-gathering work into multiple "pages" so that we can deal
+    with extremely large result sets.
+  - A dependency management system for Items has been added in
+    axiom.dependency. InstallableMixin has been removed; 
+    axiom.dependency.installOn is now used to install Items and connect powerups.
+    Items can declare their dependence on another item by declaring attributes
+    with axiom.dependency.dependsOn. When items are installed, their dependencies
+    will be created and installed as well. Installation is no longer tracked by 
+    'installedOn' attributes but by _DependencyConnector items.
+  - A bug preventing 'axiomatic userbase list' from working on a fresh
+    mantissa database has been fixed.
+
+0.5.18 (2006-12-08):
+  - Change ItemQuery.deleteFromStore so that it will call deleteFromStore on an
+    Item subclass if it has overridden that method.
+
+0.5.17 (2006-11-20):
+  - Added fullyQualifiedName to IColumn, _StoreIDComparer, and _PlaceholderColumn.
+  - Added support for distinct Item queries and for counting distinct attribute
+    queries.
+  - Exceptions raised by Axiom upgrade methods are logged instead of silently
+    swallowing them.
+
+0.5.16 (2006-11-17):
+  - Updated axiomatic to work with Twisted trunk.
+
+0.5.15 (2006-10-31):
+
+  - Raise a more informative exception when accessing Item references pointing
+    to nonexistent items.
+  - Enforce prevention of deletion of items referred to by references set to
+    reference.DISALLOW.
+  - Tables in the FROM clause of SQL generated by queries are now ordered by the
+    order of the Item subclasses in the comparisons used to generate them.
+  - A new IComparison implementation has been added to allow application-level
+    code to explicitly specify the order of types in the join.
+
+0.5.14 (2006-10-17):
+  - Added a 'batchInsert' method to Store, allowing insertion of items without
+    loading them into memory.
+  - Change ItemQuery.deleteFromStore to delete items without loading them if
+    possible.
+
+0.5.13 (2006-10-05):
+  - Changed userbase.getLoginMethods to return LoginMethods rather than
+    (localpart, domain) tuples.
+
+0.5.12 (2006-09-29):
+  - Fixed a scheduler bug that would cause tasks scheduled in a substore to be
+    removed from the scheduler.
+
+0.5.11 (2006-09-20):
+  - dependency.dependsOn now takes similar arguments to attributes.reference.
+
+0.5.10 (2006-09-12):
+  - The axiomatic commands "insert-user" and "extract-user" now interact with
+    the scheduler properly.
+
+0.5.9 (2006-08-30):
+  - A new dependency-management system has been added, in axiom.dependency.
+
+0.5.8 (2006-08-17):
+  - The upgrader added in the previous release has been fixed.
+
+0.5.7 (2006-08-14):
+  - item.Item has a new method, stored, which will be called the first time an
+    item is added to a store, in the same transaction as it is added.
+  - A new class, item.Placeholder, has been added to assist in self-join
+    queries.
+
+0.5.6 (2006-07-18):
+  - userbase.LoginSystem now raises a new exception type when login is attempted
+    using a username with no domain part.
+
+0.5.5 (2006-07-08):
+  - SubStoreStartupService was removed; user stores' services are no longer
+    incorrectly started when the Mantissa administrative powerup is installed.
+  - IPowerupIndirector was added, allowing for installation of SubStore items
+    as powerups on other items.
+
+0.5.4 (2006-07-05):
+  - Items with attributes.path attributes can now be upgraded.
+  - axiom.scheduler has been improved to make clock-related tests easier to write.
+  - Improved test coverage and various bugfixes.
+
+0.5.3 (2006-06-27):
+  - A bug causing the table name cache to grow too large was fixed.
+
+0.5.2 (2006-06-26):
+  - Type names are now determined on a per-store basis, rather than cached
+    globally on the Item.
+
+0.5.1 (2006-06-16):
+  - axiom.slotmachine._structlike removed in favor of the implementation in
+    Epsilon, epsilon.structlike.record.
+  - The batch process has been adjusted to do more work per iteration. 
+
+0.5.0 (2006-06-12):
+  Highlights:
+  - Fixed several bugs, including several potential data-corruption issues.
+    All users are recommended to upgrade, but back up your data and test your
+    upgrade first!
+  - There is now a 'money' attribute type which uses fixed-precision math in
+    the database specifically designed for dealing with the types of issues
+    associated with database-persistent financial data.
+  - Some simple relational constraints (the equivalent of ON DELETE CASCADE)
+    have been implemented using the 'whenDeleted' keyword argument.
+  - Indexes which are created in your code will now automatically be added to
+    opened databases without requiring an upgrader or a change to your Item's
+    schemaVersion.
+  - You can now use 'declareLegacyItem' to declare legacy schemas to record the
+    schema of older versions of your software -- this enables upgrading of more
+    than one step per release of your application code.
+  - You can now create multi-column indexes using attributes.compoundIndex.
+  ---
+  - Made Item.typeName and Item.schemaVersion optional in most cases.
+  - Added axiom.batch for reliably operating on large groups of items.
+  - Removed all usages of util.wait from tests
+  - added 'queryutil.contains' utility query method, for testing when a value
+    is between two attributes.
+  - Added 'negate' argument to oneOf, allowing for issing SQL 'NOT IN' queries.
+  - Improved reliability of the scheduler.  Errors are now logged in a
+    structured manner.
+  - Added helper classes for writing axiomatic plug-in commands; see
+    documentation for axiomatic.scripts.axiomatic.AxiomaticCommand and
+    AxiomaticSubCommand.
+  - AttributeQuery now provides .min() and .max() methods which return the
+    obvious thing.
+  - Transactions are more managed more conservatively; BEGIN IMMEDIATE
+    TRANSACTION is used at the beginning of each transact() call, to guarantee
+    that concurrent access is safe, if sometimes slightly slower.
+  - SQL generation has been deferred to query time, which means that there is a
+    more complete API for manipulating Query objects.
+  - repr() of various objects has been improved for easier debugging.
+  - Axiom now emits various log events which you can observe if you wish to
+    analyze query statistics in real-time.  These events don't go to the text log by
+    default: Mantissa, for example, uses them to display a pie chart of the
+    most expensive queries on a running system.
+
+0.4.0 (2005-12-20):
+  - Fixed sum() in the case of a table with no rows.
+  - LoginAccount no longer contains authentication information, but may be
+    referred to by one or more LoginMethods, which do.
+  - Added an attribute type for floats: ieee754_double.
+  - Enhanced functionality in axiom.sequence.List.
+  - Added support for SQL DISTINCT queries.
+  - On the command line, axiomatic will attempt to automatically discover
+    the correct database to use, if one is not specified.
+  - PID and logfiles are now kept in a subdirectory of the database
+    directory.
+  - The "start" axiomatic subcommand now works on Windows.
+  - Two new axiomatic subcommands have been added related to running servers
+    from Axiom database: "stop" and "status".
+  - Two new axiomatic subcommands have been added related to user
+    management: "extract-user" and "insert-user" for removing users from and
+    adding users to an existing credentials database, along with all of
+    their data.
+  - Axiom queries can now be sorted by a tuple of columns.
+
+0.3.0 (2005-11-02):
+  - Removed Axiom/axiom/examples/axiom.tac
+  - Added 'axiomatic start'
+  - added 'hyper', a 'super' capable of working with Item mixins
+  - added check to make sure Unicode strings won't be misleadingly persisted as
+    bytes(), like so:
+        >>> str(buffer(u'hello'))
+        'h\x00\x00\x00e\x00\x00\x00l\x00\x00\x00l\x00\x00\x00o\x00\x00\x00'
+  - formalized and improved query result to be an object with its own interface
+    rather than a generator
+  - correctly call activate() on items after they have been upgraded
+
+0.2.0 (2005-10-27):
+  - Removed accidental Mantissa dependency
+  - Automatic upgrade service added
+  - Lots of new docstrings
+  - Query utility module added, with a function for finding overlapping
+    ranges
+  - Added formal interface for the `where' argument to Store.query()
+  - Added 'oneOf' attribute

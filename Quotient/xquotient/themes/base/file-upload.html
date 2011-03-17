@@ -1,0 +1,30 @@
+<html xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/Mantissa/mantissa.css" />
+    <link rel="stylesheet" type="text/css" href="/static/Quotient/quotient.css" />
+    <script type="text/javascript">
+      var controller;
+      /**
+       * Called when the page loads.  Stores an instance of
+       * Quotient.Compose.FileUploadController in a global variable for
+       * later use, and calls the checkForFileData method.
+       */
+      function setUpController() {
+          controller = window.parent.Quotient.Compose.FileUploadController(
+                          document, document.forms.upload);
+          controller.checkForFileData();
+      }
+    </script>
+  </head>
+  <body onload="setUpController();">
+    <span style="display: none" id="file-data"
+      ><nevow:invisible nevow:render="lastFileData" /></span>
+
+    <center>
+      <form enctype="multipart/form-data" method="POST" onsubmit="controller.notifyParent();" name="upload">
+        <input name="uploaddata" type="file" onchange="controller.fileInputChanged();" />
+        <input type="submit" name="upload" disabled="true" value="Attach" />
+      </form>
+    </center>
+  </body>
+</html>

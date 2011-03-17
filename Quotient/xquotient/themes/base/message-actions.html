@@ -1,0 +1,131 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  nevow:render="liveElement"
+  class="message-actions-container">
+  <div class="message-actions" style="margin-left: 2px">
+    <!-- button renderer will place the contents of the tag inside the
+    "content" slot of an instance of the "button" template pattern -->
+    <div class="message-actions" style="float: right">
+      <span class="trainSpam-button" style="display: none">
+        <nevow:invisible nevow:render="button">
+          <a href="#">
+            <athena:handler event="onclick" handler="dom_trainSpam" />
+            This Is Spam
+          </a>
+        </nevow:invisible>
+      </span>
+      <span class="trainHam-button" style="display: none;">
+        <nevow:invisible nevow:render="button">
+          <a href="#">
+            <athena:handler event="onclick" handler="dom_trainHam" />
+            Not Spam
+          </a>
+        </nevow:invisible>
+      </span>
+    </div>
+    <span class="archive-button" style="display: none">
+      <nevow:invisible nevow:render="button">
+        <a href="#">
+          <athena:handler event="onclick" handler="dom_archive" />
+          archive
+        </a>
+      </nevow:invisible>
+    </span>
+    <span class="unarchive-button" style="display: none">
+      <nevow:invisible nevow:render="button">
+        <a href="#">
+          <athena:handler event="onclick" handler="dom_unarchive" />
+          unarchive
+        </a>
+      </nevow:invisible>
+    </span>
+    <span class="delete-button" style="display: none">
+      <nevow:invisible nevow:render="button">
+        <a href="#">
+          <athena:handler event="onclick" handler="dom_delete" />
+          delete
+        </a>
+      </nevow:invisible>
+    </span>
+    <span class="undelete-button" style="display: none">
+      <nevow:invisible nevow:render="button">
+        <a href="#">
+          <athena:handler event="onclick" handler="dom_undelete" />
+          undelete
+        </a>
+      </nevow:invisible>
+    </span>
+    <span class="editDraft-button">
+      <nevow:invisible nevow:render="button">
+        <a href="#">
+          <athena:handler event="onclick" handler="dom_editDraft" />
+          edit
+        </a>
+      </nevow:invisible>
+    </span>
+    <span class="defer-button" style="display: none">
+      <select class="defer">
+        <athena:handler event="onchange" handler="dom_selectDefer" />
+        <option class="defer-reset">Defer</option>
+        <option class="one-hour">1 hour</option>
+        <option class="twelve-hours">12 hours</option>
+        <option class="one-day">1 day</option>
+        <option class="one-week">1 week</option>
+        <option class="defer-other-form">other...</option>
+      </select>
+    </span>
+    <span class="forward-button" style="display: none">
+      <nevow:invisible nevow:render="button">
+        <a href="#">
+          <athena:handler event="onclick" handler="dom_forward" />
+          forward
+        </a>
+      </nevow:invisible>
+    </span>
+    <span class="reply-button" style="display: none">
+      <nevow:invisible nevow:render="button">
+        <a href="#">
+          <athena:handler event="onclick" handler="dom_reply" />
+          reply
+        </a>
+      </nevow:invisible>
+    </span>
+    <select class="more-actions">
+      <athena:handler event="onchange" handler="dom_dispatchActionFromSelect" />
+      <option class="more-actions-option">More Actions...</option>
+      <option value="replyAll">Reply To All</option>
+      <option value="printable">Printable Version</option>
+      <option value="messageSource">Message Source</option>
+      <option value="redirect">Redirect</option>
+    </select>
+    <!-- in IE the defer select is taller than the buttons, and when we hide it
+          in certain views, things get a bit fucked up.  there is probably a better
+          way to fix this -->
+    <select style="visibility: hidden">
+      <option>HORRIBLE HACK</option>
+    </select>
+    <div style="height: 2px; font-size: 0px; clear: both">&#160;</div>
+    <form style="display: none" class="defer-form">
+      <athena:handler event="onsubmit" handler="dom_formDefer" />
+      <table style="table-layout: fixed">
+        <tr>
+          <td>Days:</td><td><input type="text" name="days" value="0" /></td>
+        </tr>
+        <tr>
+          <td>Hours:</td><td><input type="text" name="hours" value="1" /></td>
+        </tr>
+        <tr>
+          <td>Minutes:</td><td><input type="text" name="minutes" value="0" /></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="right">
+            <input type="submit" value="Cancel">
+              <athena:handler event="onclick" handler="dom_hideDeferForm" />
+            </input>
+            <input type="submit" value="Defer" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>

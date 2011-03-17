@@ -1,0 +1,7 @@
+Python 2.4
+Twisted 2.4.0
+Epsilon 0.5.0
+Axiom 0.5.0
+Nevow 0.9.0
+Mantissa 0.5.0
+pyGSM 0.1

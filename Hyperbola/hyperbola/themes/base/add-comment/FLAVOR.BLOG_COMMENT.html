@@ -1,0 +1,28 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveElement"
+  class="hyperbola-add-comment">
+  <div class="hyperbola-add-comment-title"
+    >Add <nevow:invisible nevow:render="commentTypeName" /></div>
+  <form class="hyperbola-form" onsubmit="Nevow.Athena.Widget.get(this).submit(); return false">
+    <input type="hidden" name="title" value="" />
+    <input type="hidden" name="tags" value="" />
+    <table>
+      <tbody>
+        <tr valign="top">
+          <td>
+            <label for="body">Message</label>
+          </td>
+          <td>
+            <textarea name="body" rows="5" cols="50"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="right">
+            <input type="submit" value="Submit" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

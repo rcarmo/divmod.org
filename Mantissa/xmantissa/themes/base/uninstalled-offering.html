@@ -1,0 +1,11 @@
+<li xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+    xmlns:athena="http://divmod.org/ns/athena/0.7"
+    nevow:render="athenaID"
+    athena:class="Mantissa.UninstalledOffering"
+    class="uninstalled"
+    onclick="Mantissa.UninstalledOffering.get(this).install(); return false;">
+    <nevow:invisible nevow:render="mapping">
+     <nevow:slot name="name" />:
+      <nevow:slot name="description" />
+    </nevow:invisible>
+</li>

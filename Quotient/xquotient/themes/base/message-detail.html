@@ -1,0 +1,77 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  class="message-detail-fragment"
+  nevow:render="liveFragment">
+
+  <nevow:invisible nevow:render="printableLink" />
+
+  <div style="display: none; background-color: #FFFFFF" class="add-person-fragment"
+    ><nevow:invisible nevow:render="addPersonFragment" />
+  </div>
+
+  <nevow:invisible nevow:render="actions" />
+  <div nevow:render="headerPanel" class="header-panel">
+    <div class="msg-detail-sent-date"><nevow:slot name="sent" /></div>
+
+    <table style="clear: both; width: 100%" cellpadding="0" cellspacing="0" class="msg-header-table">
+      <tr>
+        <td class="msg-detail-field-name">From:</td>
+        <td class="msg-detail-field-body"><nevow:slot name="sender" /></td>
+      </tr>
+      <tr>
+        <td class="msg-detail-field-name">To:</td>
+        <td class="msg-detail-field-body"><nevow:slot name="recipient" /></td>
+      </tr>
+      <tr>
+        <td class="msg-detail-field-name">Subject:</td>
+        <td class="msg-subject msg-detail-field-body"><nevow:slot name="subject" /></td>
+      </tr>
+      <nevow:slot name="redirect-headers" />
+      <nevow:slot name="cc-detailed" />
+      <tr style="display: none" class="detailed-row">
+        <td class="msg-detail-field-name">Sent:</td>
+        <td class="msg-detail-field-body"><nevow:slot name="sent-detailed" /></td>
+      </tr>
+      <tr style="display: none" class="detailed-row">
+        <td class="msg-detail-field-name">Received:</td>
+        <td class="msg-detail-field-body"><nevow:slot name="received-detailed" /></td>
+      </tr>
+      <tr style="display: none" class="detailed-row">
+        <td class="msg-detail-field-name">Tags:</td>
+        <td class="tags-container">
+          <span class="tags-display-container"
+            ><span class="tags-display"
+              ><nevow:invisible nevow:render="tags" /></span>
+            (<a href="#" onclick="Quotient.Message.MessageDetail.get(this).editTags(); return false">Edit</a>)
+          </span>
+
+          <form style="display: none" class="edit-tags-container">
+            <athena:handler event="onsubmit" handler="dom_saveTags" />
+            <input class="add-tags-dialog-text-input" type="text" name="tags" size="38" />
+            <a href="#">
+              <athena:handler event="onclick" handler="dom_saveTags" />
+              Save
+            </a>
+            <a href="#" onclick="Quotient.Message.MessageDetail.get(this).hideTagEditor(); return false">Cancel</a>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td class="msg-detail-field-name" colspan="2" style="text-align: left">
+          <a href="#" class="detail-toggle"
+            onclick="Quotient.Message.MessageDetail.get(this).toggleMoreDetail(this); return false"
+            >More Detail</a>
+        </td>
+      </tr>
+      <nevow:invisible nevow:render="attachmentPanel" />
+    </table>
+
+    <nevow:invisible nevow:render="scrubbedDialog" />
+  </div>
+
+  <nevow:invisible nevow:render="messageBody" />
+
+  <nevow:invisible nevow:render="imagePanel" />
+  <nevow:invisible nevow:render="attachedMessages" />
+
+</div>

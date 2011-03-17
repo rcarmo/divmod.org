@@ -1,0 +1,42 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveElement"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  class="hyperbola-blurb hyperbola-blog">
+
+  <div class="hyperbola-blog-title">
+    <div class="hyperbola-blog-main-title"><nevow:invisible nevow:render="title" /></div>
+    <div class="hyperbola-blog-sub-title"><nevow:invisible nevow:render="body" /></div>
+  </div>
+
+  <div nevow:pattern="tag"
+    ><a href="#" class="tag"
+      onclick="return Nevow.Athena.Widget.get(this).chooseTag(this);"><nevow:slot name="name" /></a></div>
+
+  <div nevow:pattern="selected-tag"
+    ><a href="#" class="selected-tag"
+      onclick="return Nevow.Athena.Widget.get(this).unchooseTag(this);"><nevow:slot name="name" /></a></div>
+
+  <table style="width: 100%">
+    <tbody>
+      <tr valign="top">
+        <td style="white-space: nowrap">
+          <div class="hyperbola-section-column">
+            <div class="hyperbola-section-heading">Categories</div>
+            <form name="tag-form" method="POST" style="display: none">
+              <input type="hidden" name="tag" />
+            </form>
+            <nevow:invisible nevow:render="tags" />
+          </div>
+        </td>
+        <td style="width: 100%">
+          <div class="hyperbola-blurb-body">
+            <nevow:invisible nevow:render="view">
+              <h2 nevow:pattern="no-child-blurbs">No <nevow:slot name="child-type-name" />s</h2>
+            </nevow:invisible>
+          </div>
+          <nevow:invisible nevow:render="addComment" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

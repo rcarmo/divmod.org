@@ -1,0 +1,19 @@
+<div
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/athena/0.7"
+  nevow:render="liveFragment">
+
+  <div nevow:render="existingRules">
+    <div nevow:pattern="rule">
+      <nevow:slot name="headerName" />
+      | <nevow:slot name="negate" />
+      | <nevow:slot name="operation" />
+      | <nevow:slot name="value" />
+      | <nevow:slot name="shortCircuit" />
+      | <nevow:slot name="caseSensitive" />
+      | <nevow:slot name="tagName" />
+    </div>
+  </div>
+  <nevow:invisible nevow:render="addRule" />
+</div>

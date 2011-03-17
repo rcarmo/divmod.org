@@ -1,0 +1,40 @@
+25 November 2004
+Release 0.3
+Fixed error in calculation.
+Simpler regex tokenization. Now works with unicode.
+Removed split.py.
+
+5 October 2003
+Release 0.2.4
+Added utility methods for removing, renaming and merging Pools:
+    removePool(), renamePool() and mergePools()
+
+Also added utility methdos for inspecting pool data:
+    poolData() and poolTokens()
+    
+All of these methods take pool names as arguments.
+
+25 Aug 2003
+Release 0.2.3
+Made it possible to pass an iterator of tokens.
+
+16 Aug 2003
+Release 0.2.2
+Added ability to "forget" training using Bayes.untrain()
+
+2 Aug 2003
+Release 0.2.1
+Removed the declaration of slots the tokenizer to make it
+play nice with Quotient. No change in functionality.
+
+16 June 2003
+Release 0.2
+Added basic GUI for training and testing.
+Made the storage class pluggable, so different storage managers
+can be used.
+Some convenience functions and better repr.
+Removed some code that was not being run.
+
+18 May 2003
+Release 0.1
+Initial release

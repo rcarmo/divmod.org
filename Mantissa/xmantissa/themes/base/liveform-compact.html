@@ -1,0 +1,117 @@
+<div xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  xmlns:nevow="http://nevow.com/ns/nevow/0.1" nevow:render="form">
+  <nevow:slot name="form" />
+
+  <form nevow:pattern="liveform"
+    action="#" nevow:render="liveElement"
+    onsubmit="Mantissa.LiveForm.FormWidget.get(this).submit(); return false;">
+
+    <table>
+      <nevow:slot name="inputs" />
+      <tr>
+        <td colspan="2">
+          <div style="float: right">
+            <img class="progress-message" style="display: none; float: left; margin: 0 1em" src="/Mantissa/images/spinner.gif" />
+            <nevow:invisible nevow:render="submitbutton" />
+          </div>
+        </td>
+      </tr>
+    </table>
+    <span id="input-error-message" />
+  </form>
+
+  <table nevow:pattern="subform" nevow:render="liveElement">
+    <nevow:slot name="inputs" />
+  </table>
+
+  <tr nevow:pattern="description">
+    <td colspan="2" class="liveform-param-description"
+      ><nevow:slot name="description" /></td>
+  </tr>
+
+  <nevow:invisible nevow:pattern="parameter-input">
+    <nevow:slot name="input" />
+    <nevow:slot name="description" />
+  </nevow:invisible>
+
+  <!-- Note that any whitespace in the textarea tag will appear in the
+  output, and so none should be included, if at all possible. -->
+  <tr nevow:pattern="textarea-input-container">
+    <td class="liveform-input-label"><nevow:slot name="label" /></td>
+    <td>
+      <textarea><nevow:attr name="name"><nevow:slot name="name" /></nevow:attr><nevow:slot name="value" /></textarea>
+    </td>
+  </tr>
+
+  <tr nevow:pattern="text-input-container">
+    <td class="liveform-input-label"><nevow:invisible nevow:render="label" /></td>
+    <td><input type="text"><nevow:attr name="name" nevow:render="name" /><nevow:attr name="value" nevow:render="default" /></input></td>
+  </tr>
+
+  <tr nevow:pattern="multi-text-input-container" valign="top">
+    <td class="liveform-input-label"><nevow:slot name="label" /></td>
+    <td class="multi-text-input-list"><nevow:slot name="inputs" /></td>
+  </tr>
+
+  <tr nevow:pattern="password-input-container">
+    <td class="liveform-input-label"><nevow:invisible nevow:render="label" /></td>
+    <td><input type="password"><nevow:attr name="name" nevow:render="name" /><nevow:attr name="value" nevow:render="default" /></input></td>
+  </tr>
+
+  <tr nevow:pattern="radio-input-container">
+    <td><nevow:slot name="input" /></td>
+    <td class="liveform-input-label"><nevow:slot name="label" /></td>
+  </tr>
+
+  <tr nevow:pattern="form-input-container">
+    <td colspan="2" nevow:render="input" />
+  </tr>
+
+  <!-- Repeatable forms use Athena and are LiveElements, so this pattern must
+       have the liveElement renderer.
+    -->
+  <tr nevow:render="liveElement" nevow:pattern="repeatable-form-input-container">
+    <td colspan="2">
+      <nevow:invisible nevow:render="forms" />
+      <div class="liveform-repeater" nevow:pattern="repeater">
+        <a href="#" class="repeatable-form-repeat-link">
+          <athena:handler event="onclick" handler="dom_repeat" />
+          Add another <nevow:slot name="object-description" />
+        </a>
+      </div>
+      <nevow:invisible nevow:render="repeater" />
+    </td>
+  </tr>
+
+  <tr nevow:pattern="checkbox-input-container">
+    <td class="liveform-input-label"><nevow:slot name="label" /></td>
+    <td><nevow:slot name="input" /></td>
+  </tr>
+
+  <input nevow:pattern="input">
+    <nevow:attr name="value"><nevow:slot name="value" /></nevow:attr>
+    <nevow:attr name="name"><nevow:slot name="name" /></nevow:attr>
+    <nevow:attr name="type"><nevow:slot name="type" /></nevow:attr>
+  </input>
+
+  <input nevow:pattern="checked-checkbox-input" type="checkbox" checked="true">
+    <nevow:attr name="name"><nevow:slot name="name" /></nevow:attr>
+  </input>
+
+  <tr nevow:pattern="choice-input-container">
+    <nevow:attr name="class" nevow:render="name">liveform_</nevow:attr>
+    <td class="liveform-input-label"
+      ><nevow:invisible nevow:render="label" /></td>
+    <td>
+      <select nevow:render="multiple">
+        <nevow:attr name="name" nevow:render="name" />
+        <nevow:invisible nevow:render="options">
+          <option nevow:render="selected" nevow:pattern="option">
+            <nevow:attr name="value" nevow:render="index" />
+            <nevow:invisible nevow:render="description" />
+          </option>
+        </nevow:invisible>
+      </select>
+    </td>
+  </tr>
+</div>

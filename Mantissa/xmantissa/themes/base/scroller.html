@@ -1,0 +1,15 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1" nevow:render="liveElement"
+  xmlns:athena="http://divmod.org/ns/athena/0.7"
+  class="scrolltable-widget-node">
+
+  <table class="scrolltable" cellspacing="0">
+
+    <thead class="scroll-header-container">
+      <tr class="scroll-header-row" />
+    </thead>
+
+    <tbody class="scroll-viewport"
+      style="overflow-y: auto; overflow-x: hidden; width: 100%; height: 300px; border: 0px"
+      ><athena:handler event="onscroll" handler="onScroll" /></tbody>
+  </table>
+</div>

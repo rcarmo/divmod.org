@@ -1,0 +1,56 @@
+nevow (0.6.0-1.snapshot) unstable; urgency=low
+
+  * SVN snapshot.
+
+ -- Tommi Virtanen <tv@debian.org>  Sun,  6 Nov 2005 20:45:27 +0200
+
+nevow (0.6.0-1) unstable; urgency=low
+
+  * New upstream version. (Closes: #336027)
+  * Acknowledge NMU (Closes: #319230), but please be more careful in the
+    future; no NMU patch was sent to BTS
+  * Remove setupcommon.pyc when cleaning, or dpkg-source will see a binary
+    file content change.
+  * Run unit tests when building.
+  * Clean build tree, distutils fails to remove all of it.
+  * Change priority to extra, as twisted is extra and nevow depends on it.
+
+ -- Tommi Virtanen <tv@debian.org>  Sun,  6 Nov 2005 20:26:39 +0200
+
+nevow (0.4.1-1.1) unstable; urgency=low
+
+  * NMU
+  * Add missing build depends in python2.4-dev (Closes: #319230)
+  * lintian error: fix package description indent for list items.
+
+ -- Bastian Kleineidam <calvin@debian.org>  Sat, 13 Aug 2005 18:48:20 +0200
+
+nevow (0.4.1-1) unstable; urgency=low
+
+  * New upstream version.
+  * Python 2.4 support.
+  * Not using upstream tarball as it is too broken compared to
+    SVN tag; specifically it is missing nevow/Canvas.fla, which
+    is considered source code.
+
+ -- Tommi Virtanen <tv@debian.org>  Mon, 27 Jun 2005 15:35:57 +0200
+
+nevow (0.3.0-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Tommi Virtanen <tv@debian.org>  Thu, 30 Sep 2004 12:12:44 +0300
+
+nevow (0.2.0-2) unstable; urgency=low
+
+  * Build-depend on both python2.3-dev and python-dev, it seems that is
+    what cdbs wants. (Closes: #257911)
+
+ -- Tommi Virtanen <tv@debian.org>  Tue, 13 Jul 2004 16:39:17 +0300
+
+nevow (0.2.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Tommi Virtanen <tv@debian.org>  Tue, 29 Jun 2004 10:26:36 +0300
+

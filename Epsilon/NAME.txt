@@ -1,0 +1,13 @@
+
+See: http://mathworld.wolfram.com/Epsilon.html
+
+The constant 'epsilon' is a value that is as close as possible to zero without
+being zero.  It is frequently used by computer scientists to refer to values
+which are negligeable.
+
+Divmod Epsilon is named for that because it is a small body of code upon which
+all of our other projects depend.  It has no particular theme associated with
+it, except to remain small and lightweight, and enforce certain conventions and
+to provide common conveniences that do not belong in any lower level of
+infrastructure.
+

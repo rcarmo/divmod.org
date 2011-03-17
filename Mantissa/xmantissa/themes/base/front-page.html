@@ -1,0 +1,21 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+     style="text-align: center"
+     class="front-page-fragment">
+
+  <center>
+    <div class="front-page-splash-logo" />
+  </center>
+
+  <div nevow:render="sequence" nevow:data="offerings">
+    <nevow:invisible nevow:pattern="divider">|</nevow:invisible>
+    <span nevow:pattern="item" nevow:render="mapping">
+      <a>
+        <nevow:attr name="href"><nevow:slot name="name" /></nevow:attr>
+        <nevow:slot name="name" />
+      </a>
+    </span>
+  </div>
+
+  Welcome to Divmod&#8482; Mantissa&#8482;.
+
+</div>

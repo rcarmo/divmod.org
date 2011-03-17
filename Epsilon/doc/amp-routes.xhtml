@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>AMP Routes</title>
+  </head>
+  <body>
+    <h1>AMP Routes</h1>
+
+    <h2>Overview</h2>
+
+    <p>
+      Normally, an AMP connection is between two <code class="API"
+      base="twisted.protocols.amp">AMP</code> instances; each instance receives
+      all AMP boxes sent by the other side and handles them by interpreting
+      them as commands, responses to commands, or in some other way.  This
+      typically means that the logic for handling boxes on each side of the
+      connection is completely defined by a single object.  Sometimes it is
+      useful to allow multiple objects, perhaps of different types, to
+      participate in defining this logic.
+    </p>
+
+    <p>
+      <code>epsilon.amprouter</code> implements utilities which allow an
+      arbitrary number of objects, providers of <code>IBoxReceiver</code> (for
+      example, instances of <code>AMP</code>), to define how received AMP boxes
+      are interpreted.  This is useful to multiplex unrelated <code>AMP</code>
+      instances over a single TCP connection, to split up a single AMP protocol
+      into multiple simpler protocols, and for many other purposes.
+    </p>
+
+    <p>
+      Readers should familiarize themselves with the following concepts in
+      order to understand all sections of this document:
+    </p>
+
+    <ul>
+      <li>
+        Twisted <a
+        href="http://twistedmatrix.com/projects/core/documentation/howto/clients.html">TCP
+        clients</a> and <a
+        href="http://twistedmatrix.com/projects/core/documentation/howto/servers.html">TCP
+        servers</a>
+      </li>
+      <li>
+        <a href="http://twistedmatrix.com/projects/core/documentation/howto/defer.html">
+        Using Deferreds
+        </a>
+      </li>
+      <li>
+        Twisted <code class="API" base="twisted.protocols.amp">AMP</code>
+      </li>
+    </ul>
+
+    <h2>Routers</h2>
+
+    <p>
+      When working with routes, the object primarily of interest will be a <a
+      class="API" base="epsilon.amprouter">Router</a> instance.  Each AMP
+      client and server will have a <code>Router</code> instance which they can
+      use to create new routes.  They will use its <code class="API"
+      base="epsilon.amprouter">Router.bindRoute</code> method to set up
+      whatever routes they require.
+    </p>
+
+    <h2>Servers</h2>
+
+    <p>
+      <code>epsilon.amprouter</code> does not define a command for creating new
+      routes because different applications have different requirements for how
+      new routes are set up.  An application may want to negotiate about the
+      <code>IBoxReceiver</code> implementation which is associated with a
+      route, it may want to supply initial arguments to that object, it may
+      want to do version negotiation, and so on.  The first thing an
+      application using routes must do, then, is to define a way to create new
+      routes.  Consider the following example which allows routes to be created
+      with a <code>NewRoute</code> AMP command and associates them with a
+      parameterized <code>IBoxReceiver</code> implementation.
+    </p>
+
+    <a href="listings/amp/route_setup.py" class="py-listing">
+      Creation of new routes
+    </a>
+
+    <p>
+      <code>AMPRouteServerFactory.buildProtocol</code> creates new
+      <code>RoutingAMP</code> instances, each with a new <code>Router</code>.
+      The <code>Router</code> instance will become the <code>RoutingAMP</code>
+      instance's <code>boxReceiver</code> attribute.  This is important for two
+      reasons.  First, it allows the router to work by causing all AMP boxes
+      received from the connection to be delivered to the router to be
+      dispatched appropriately.  Second, it gives the <code>RoutingAMP</code>
+      instance a reference to the <code>Router</code> instance; this is
+      necessary so that new routes can be created.
+    </p>
+
+    <p>
+      After creating the <code>Router</code> and <code>RoutingAMP</code>,
+      <code>buildProtocol</code> also sets up the <code>RoutingAMP</code>
+      instance to be the default receiver by binding it to the
+      <code>None</code>.  All AMP boxes without routing information will be
+      delivered to the default receiver.  This is important because it allows
+      the <code>NewRoute</code> command to be handled by the
+      <code>RoutingAMP</code> instance.
+    </p>
+
+    <p>
+      <code>RoutingAMP</code>'s <code>NewRoute</code> responder uses
+      <code>self.boxReceiver</code>, the <code>Router</code> instance provided
+      by the factory, to <em>bind</em> the return value of
+      <code>self.factory.routeProtocol()</code> to a new route.  Then, it
+      connects the route to the identifier specified in the
+      <code>NewRoute</code> command.  Finally, it returns the identifier of the
+      route it has just created.  Once this has happened, the route is
+      completely set up on the server.
+    </p>
+
+    <p>
+      Finally, the <code>connect</code> function wraps up the necessary calls
+      to routing methods and a use of the <code>NewRoute</code> command to form
+      the client side of the setup.
+    </p>
+
+    <p>
+      First, let's look at an example of using <code>AMPRouteServerFactory</code> and
+      <code>RoutingAMP</code> to run a server.
+    </p>
+
+    <a href="listings/amp/route_server.py" class="py-listing">
+      Routed counters server
+    </a>
+
+    <p>
+      In this example, a simple counting protocol is hooked up to the server.
+      Each route which is created is associated with a new instance of this
+      protocol.  The protocol does just one simple thing, it keeps track of how
+      many times the <code>Count</code> command is issued to it and returns
+      this value in the response to that command.
+    </p>
+
+    <p>
+      Next we'll look at how a client can connect to this server, create new
+      routes, and issue commands over them.
+    </p>
+
+    <h2>Clients</h2>
+
+    <p>
+      Just as servers must, clients must first set up a route before they can
+      send boxes over it.  A client uses the same methods as the server,
+      <code>Router.bindRoute</code> and <code>Route.connectTo</code>, to set up
+      a new route.  Here's an example which makes one TCP connection to an AMP
+      server, sets up three routes, and then issues multiple commands over each
+      of them.
+    </p>
+
+    <a href="listings/amp/route_client.py" class="py-listing">
+      Routed counters client
+    </a>
+
+    <p>
+      Note first how <code>main</code> creates an <code>AMP</code> with a
+      <code>Router</code> instance.  Note also how <code>makeRoutes</code>
+      binds and connects the protocol to the default route.  This mirrors the
+      route setup which was done on the server and is necessary for the same
+      reasons.
+    </p>
+
+    <p>
+      Once an AMP connection is set up and the default route is bound,
+      <code>makeRoutes</code> uses the previously defined <code>connect</code>
+      function to establish three new routes.  Each route is associated with a
+      <code>CountClient</code> instance which will issue several count commands
+      and report the results.  The results of each command are tracked so that
+      when they have all been received the client can exit.
+    </p>
+  </body>
+</html>

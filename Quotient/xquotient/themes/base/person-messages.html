@@ -1,0 +1,29 @@
+<nevow:invisible xmlns:nevow="http://nevow.com/ns/nevow/0.1" nevow:render="messages">
+  <table nevow:pattern="messages" class="person-message-list">
+    <nevow:slot name="messages" />
+  </table>
+
+  <tr nevow:pattern="message" class="person-message">
+    <td class="person-message-sender"><nevow:slot name="sender" /></td>
+    <td class="person-message-subject">
+      <div class="subject-wrapper">
+        <nevow:slot name="subject" />
+      </div>
+    </td>
+    <td class="person-message-date"><nevow:slot name="date" /></td>
+  </tr>
+
+  <tr nevow:pattern="unread-message" class="unread-person-message">
+    <td class="person-message-sender"><nevow:slot name="sender" /></td>
+    <td class="person-message-subject">
+      <div class="subject-wrapper">
+        <nevow:slot name="subject" />
+      </div>
+    </td>
+    <td class="person-message-date"><nevow:slot name="date" /></td>
+  </tr>
+
+  <span nevow:pattern="no-messages" class="no-messages">
+    No Messages
+  </span>
+</nevow:invisible>

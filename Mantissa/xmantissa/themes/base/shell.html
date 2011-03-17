@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+
+  <head nevow:render="head">
+    <title nevow:render="title" />
+    <script type="text/javascript" src="/Mantissa/js/shell.js"></script>
+    <base><nevow:attr name="href" nevow:render="rootURL" /><!-- IE dislikes self-closing base tags --></base>
+  </head>
+
+  <body>
+    <table style="width: 100%;" cellspacing="0" cellpadding="0" class="mantissa-global-menubar">
+      <thead />
+      <tbody>
+        <tr valign="center">
+          <td class="mantissa-global-navigation-spacer" />
+          <td class="search-container" align="right">
+            <table cellpadding="0" cellspacing="0" style="height: 100%">
+              <thead />
+              <tbody>
+                <tr valign="center">
+                  <td>
+                    <span class="mantissa-global-username" nevow:render="username">
+                      You are logged in as
+                    </span>
+                    <span class="mantissa-global-navigation-link"
+                       nevow:render="logout">
+                      <span class="mantissa-global-navigation-separator">|</span>
+                      <a class="mantissa-global-navigation-link">
+                        <nevow:attr name="href" nevow:render="settingsLink" />
+                        Settings
+                      </a>
+                      <span class="mantissa-global-navigation-separator">|</span>
+                      <a href="/__logout__">
+                        Log out
+                      </a>
+                    </span>
+                  </td>
+                  <td nevow:render="search">
+                    <a href="#"
+                       onclick="MantissaShell.searchButtonClicked(this); return false"
+                       id="search-button">
+                      <img src="/Mantissa/images/search-button-unselected.png" border="0" />
+                    </a>
+                    <form id="search-form" style="display: none">
+                      <nevow:attr name="action"><nevow:slot name="form-action" /></nevow:attr>
+                      <table>
+                        <tr valign="center">
+                          <td>
+                            <input name="term" class="search-text" type="text" />
+	                    <input type="hidden" name="_charset_" />
+                          </td>
+                          <td>
+                            <a href="#" onclick="document.forms['search-form'].submit(); return false">
+                              <img src="/Mantissa/images/search-button-small.png" border="0" />
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot />
+            </table>
+          </td>
+
+          <td class="mantissa-global-navigation-links" nevow:render="authenticateLinks">
+            <a class="mantissa-global-navigation-link" href="/login/private">Log in</a>
+            <a class="mantissa-global-navigation-link" nevow:pattern="signup-link">
+              <span class="mantissa-global-navigation-separator">|</span>
+              <nevow:attr name="href"><nevow:slot name="url" /></nevow:attr>
+              <nevow:slot name="prompt" />
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table style="width: 100%;" cellspacing="0" cellpadding="0" class="mantissa-application-menubar">
+      <thead />
+      <tbody>
+        <tr>
+          <td style="height: 2em;" />
+          <td class="app-nav-container" nevow:render="applicationNavigation">
+            <nevow:invisible nevow:pattern="subtab">
+              <nevow:slot name="tab-contents" />
+            </nevow:invisible>
+            <a nevow:pattern="subtab-contents">
+              <nevow:attr name="href"><nevow:slot name="href"/></nevow:attr>
+              <nevow:slot name="name" />
+            </a>
+            <nevow:slot name="tabs" />
+            <div nevow:pattern="app-tab" class="tab-button">
+              <nevow:slot name="tab-contents" />
+              <div class="subtabs" style="z-index: 1000;
+                                          display: none;
+                                          position: absolute"
+                   onmouseover="MantissaShell.subtabHover(this);"
+                   onmouseout="MantissaShell.tabUnhover(this);"
+                   ><nevow:slot name="subtabs" /></div>
+            </div>
+            <div nevow:pattern="selected-app-tab" class="selected-tab-button">
+              <nevow:slot name="tab-contents" />
+              <div class="subtabs" style="z-index: 1000;
+                                          display: none;
+                                          position: absolute;
+                                          "
+                   onmouseover="MantissaShell.subtabHover(this);"
+                   onmouseout="MantissaShell.tabUnhover(this);"
+                   ><nevow:slot name="subtabs" /></div>
+            </div>
+            <table nevow:pattern="selected-tab-contents"
+                   onmouseover="MantissaShell.tabHover(this, false)"
+                   onmouseout="MantissaShell.tabUnhover(this)"
+                   cellpadding="0" cellspacing="0">
+              <tr class="tab-button-row">
+                <td class="tab-tl-corner" />
+                <td class="tab-top-edge" />
+                <td class="tab-tr-corner" />
+              </tr>
+              <tr class="tab-text-row">
+                <td class="tab-left-edge" />
+                <td class="tab-text-cell">
+                  <div>
+                    <a>
+                      <nevow:attr name="href"><nevow:slot name="href" /></nevow:attr>
+                      <nevow:slot name="name" />
+                    </a>
+                  </div>
+                </td>
+                <td class="tab-right-edge" />
+              </tr>
+            </table>
+            <table nevow:pattern="tab-contents"
+                   onmouseover="MantissaShell.tabHover(this, false)"
+                   onmouseout="MantissaShell.tabUnhover(this)"
+                   cellpadding="0" cellspacing="0">
+              <tr class="tab-button-row">
+                <td class="tab-tl-corner" />
+                <td class="tab-top-edge" />
+                <td class="tab-tr-corner" />
+              </tr>
+              <tr class="tab-text-row">
+                <td class="tab-left-edge" />
+                <td class="tab-text-cell">
+                  <a onmouseover="MantissaShell.tabHover(this, false)"
+                     onmouseout="MantissaShell.tabUnhover(this)">
+                    <nevow:attr name="href"><nevow:slot name="href" /></nevow:attr>
+                    <nevow:slot name="name" />
+                  </a>
+                </td>
+                <td class="tab-right-edge" />
+              </tr>
+              <tr class="tab-button-row">
+                <td class="tab-bl-corner" />
+                <td class="tab-bottom-edge" />
+                <td class="tab-br-corner" />
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="private-fragment-content" nevow:render="content" />
+    <div id="mantissa-footer" nevow:render="footer" />
+    <nevow:invisible nevow:render="urchin">
+      <script src="http://www.google-analytics.com/urchin.js"
+              type="text/javascript">
+      </script>
+      <script type="text/javascript">
+        _uacct = "<nevow:slot name='urchin-key' />";
+        urchinTracker();
+      </script>
+    </nevow:invisible>
+  </body>
+</html>

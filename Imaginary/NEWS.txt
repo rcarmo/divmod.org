@@ -1,0 +1,36 @@
+0.0.5 (2009-11-25):
+  - Remove the dead imaginary.objects.Thing.locate method
+  - Introduce an interface intended to be provided by administrative actors
+    and require it for the "illuminate" command.
+  - Remove the custom SSH server and instead plug in to the Mantissa SSH
+    application server.
+  - Remove all uses of "axiom.dependency.installOn".
+  - Fix a bug which caused newly created avatars to not be announced when
+    they arrived at the starting location.
+  - When presenting an ambiguity error to an actor, enumerate the possible
+    resolutions.
+  - Fix certain terminal handling issues with east asian characters.
+
+0.0.4 (2008-08-12):
+
+  - A "plain" Thing type has now been added and is available to the
+    "create" command.
+  - "scrutinize" now works when the target is not a container.
+  - a "list thing types" command has been added, to allow viewing
+    types of things that can be created.
+  - "create" now allows users to specify if a thing is considered a
+    common or proper noun.
+  - Improved grammar in action text for various verbs.
+  - Added a "set" action for changing thing attributes.
+  - Changed noun resolution to match substrings and to match
+    case-insensitively.
+
+0.0.3 (2007-01-23):
+  - Work with Axiom dependency api
+
+0.0.2 (2006-09-20):
+  - Some changes
+
+0.0.1 (2006-06-16):
+  - Imported from Pottery repository
+  - Imported from Imagination repository

@@ -1,0 +1,101 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+     nevow:render="liveFragment">
+
+  <div nevow:render="navigation" />
+  <div class="tdb-table">
+    <div nevow:render="table" />
+  </div>
+
+  <table style="border-spacing: 0px" nevow:pattern="navigation" class="tdb-navigation-panel">
+    <tr valign="center">
+      <td>
+        <!-- set display: none on half of the navigation buttons so that they dont appear and then dissappear
+        if the javascript takes a while to load -->
+        <a style="display: none;" class="first-page" href="#" onclick="return Mantissa.TDB.Controller.get(this).firstPage();">
+          <img src="/Mantissa/images/first.png" border="0" />
+        </a>
+        <img class="first-page-disabled" src="/Mantissa/images/first_disabled.png" border="0" />
+
+        <a style="display: none;" class="prev-page" href="#" onclick="return Mantissa.TDB.Controller.get(this).prevPage();">
+          <img src="/Mantissa/images/prev.png" border="0" />
+        </a>
+        <img class="prev-page-disabled" src="/Mantissa/images/prev_disabled.png" border="0" />
+
+        <a style="display: none;" class="next-page" href="#" onclick="return Mantissa.TDB.Controller.get(this).nextPage();">
+          <img src="/Mantissa/images/next.png" border="0" />
+        </a>
+        <img class="next-page-disabled" src="/Mantissa/images/next_disabled.png" border="0" />
+
+        <a style="display: none;" class="last-page" href="#" onclick="return Mantissa.TDB.Controller.get(this).lastPage()">
+          <img src="/Mantissa/images/last.png" border="0" />
+        </a>
+        <img class="last-page-disabled" src="/Mantissa/images/last_disabled.png" border="0" />
+        <img style="visibility: hidden;" class="throbber" src="/Mantissa/images/circle-throbber.gif" />
+      </td>
+      <td class="tdb-action-result"></td>
+      <td class="tdb-control-panel" style="display: none">
+        viewing items <span class="tdb-item-start" /> to
+        <span class="tdb-item-end" /> out of <span class="tdb-total-items" />
+      </td>
+    </tr>
+  </table>
+
+  <td nevow:pattern="cell">
+    <nevow:attr name="class"><nevow:slot name="class" /></nevow:attr>
+    <nevow:attr name="onclick"><nevow:slot name="onclick" /></nevow:attr>
+    <nevow:slot name="value" />
+  </td>
+
+  <th nevow:pattern="column-header">
+    <nevow:attr name="width"><nevow:slot name="width" /></nevow:attr>
+    <nevow:slot name="name" />
+  </th>
+
+  <th nevow:pattern="sortable-column-header"
+    class="tdb-clickable-header">
+    <nevow:attr name="onclick"><nevow:slot name="onclick" /></nevow:attr>
+    <nevow:attr name="width"><nevow:slot name="width" /></nevow:attr>
+    <nevow:slot name="name" />
+  </th>
+
+  <th nevow:pattern="sorted-column-header-ascending"
+    class="tdb-clickable-header">
+    <nevow:attr name="onclick"><nevow:slot name="onclick" /></nevow:attr>
+    <nevow:attr name="width"><nevow:slot name="width" /></nevow:attr>
+    <nevow:slot name="name" />
+    <span class="sort-arrow">&#8593;</span>
+  </th>
+
+  <th nevow:pattern="sorted-column-header-descending"
+    class="tdb-clickable-header">
+    <nevow:attr name="onclick"><nevow:slot name="onclick" /></nevow:attr>
+    <nevow:attr name="width"><nevow:slot name="width" /></nevow:attr>
+    <nevow:slot name="name" />
+    <span class="sort-arrow">&#8595;</span>
+  </th>
+
+  <tr nevow:pattern="row">
+    <nevow:attr name="class"><nevow:slot name="class" /></nevow:attr>
+    <nevow:slot name="cells" />
+  </tr>
+
+  <div class="tdb-no-rows-dialog"  nevow:pattern="no-rows">
+    No <nevow:slot name="items-called" /> To Display
+    <span class="tdbtbody" />
+  </div>
+
+  <table xmlns="http://www.w3.org/1999/xhtml" class="tdb" nevow:pattern="table">
+    <nevow:attr name="width"><nevow:slot name="width" /></nevow:attr>
+    <thead>
+      <tr>
+        <nevow:slot name="column-headers" />
+      </tr>
+    </thead>
+    <tfoot></tfoot>
+
+    <tbody class="tdbtbody">
+      <nevow:slot name="rows" />
+    </tbody>
+  </table>
+</div>

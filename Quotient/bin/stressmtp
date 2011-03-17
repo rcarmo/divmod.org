@@ -1,0 +1,8 @@
+#!/usr/bin/python
+
+import sys
+from xquotient.stressmtp import main, usage
+try:
+    main(*sys.argv[1:])
+except TypeError:
+    print usage()

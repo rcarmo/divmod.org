@@ -1,0 +1,15 @@
+<span xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  xmlns:athena="http://divmod.org/ns/nevow/0.7"
+  nevow:render="liveFragment">
+  <nevow:invisible nevow:render="senderPerson">
+    <a href="#">
+      <athena:handler event="onclick" handler="showAddPerson" />
+      <img src="/static/Quotient/images/not-a-person.png" border="0" />
+    </a>
+    <span class="sender-person-name"
+      ><nevow:attr name="title"><nevow:slot
+          name="identifier" /></nevow:attr><nevow:slot name="name" /></span>
+    <span class="person-identifier" style="display: none;"
+      ><nevow:slot name="identifier" /></span>
+  </nevow:invisible>
+</span>

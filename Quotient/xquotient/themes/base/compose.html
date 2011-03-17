@@ -1,0 +1,209 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+  nevow:render="liveFragment"
+  xmlns:athena="http://divmod.org/ns/athena/0.7"
+  style="border-top: solid 1px #0099CC;"
+  class="compose-widget">
+
+  <select nevow:pattern="from-select" name="fromAddress">
+    <nevow:slot name="options" />
+  </select>
+
+  <option nevow:pattern="from-select-option">
+    <nevow:attr name="value"><nevow:slot name="value" /></nevow:attr>
+    <nevow:slot name="address" />
+  </option>
+
+  <tr nevow:pattern="subject">
+    <td class="header-table-first-col">Subject:</td>
+    <td class="header-table-last-col">
+      <input type="text" name="subject" style="width: 98%"
+        ><nevow:attr name="value"><nevow:slot name="subject" /></nevow:attr></input>
+    </td>
+  </tr>
+
+  <textarea nevow:pattern="message-body"
+    name="messageBody"
+    class="compose-message-body" cols="79" rows="20"
+    ><nevow:slot name="body" /></textarea>
+
+  <a nevow:pattern="attach-button"
+    style="float: left"
+    href="#"
+    onclick="Quotient.Compose.Controller.get(this).toggleAttachDialog(this); return false">
+    <img border="0" src="/static/Quotient/images/attach-button.png" />
+    <span style="color: #0099CC">Attach</span>
+  </a>
+
+  <div style="display: none;
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              right: 10px;
+              bottom: 10px;
+              background-color: gray;
+              "
+        class="progress-message">
+  </div>
+
+  <div style="display: none;
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              right: 10px;
+              bottom: 10px;
+              background-color: #00aa00;
+              color: #88ff88;
+              "
+        class="success-message">
+  </div>
+
+  <div style="display: none;
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              right: 10px;
+              bottom: 10px;
+              background-color: green;
+              "
+        class="failure-message">
+  </div>
+
+  <table class="attach-dialog" cellpadding="0" cellspacing="0" style="display: none">
+    <tbody>
+      <tr>
+        <td>
+          <div class="attach-dialog-header">
+            Attach Files
+          </div>
+        </td>
+        <td align="right">
+          <a href="#" onclick="Quotient.Compose.Controller.get(this).toggleAttachDialog(this); return false">
+            <img src="/static/Quotient/images/close.png" border="0" />
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="upload-file-container" style="clear: both">
+            <nevow:invisible nevow:render="fileCabinet" />
+          </div>
+          <span class="upload-notification" style="visibility: hidden">Uploading...</span>
+          <li nevow:pattern="attachment"
+            ><nevow:slot name="name" /> <a href="#"
+              onclick="Quotient.Compose.Controller.get(this).removeFile(this); return false">(remove)</a>
+            <span class="attachment-id" style="display: none"><nevow:slot name="id" /></span>
+          </li>
+          <div class="uploaded-files" style="display: none" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nevow:invisible nevow:render="compose">
+    <iframe nevow:pattern="cabinet-iframe" class="cabinet">
+      <nevow:attr name="src"><nevow:slot name="src" /></nevow:attr>
+    </iframe>
+    <input type="checkbox" name="draft" style="display: none" />
+    <span class="address-completions" style="display: none; position: absolute" />
+    <a class="inbox-link" style="display: none">
+      <nevow:attr name="href"><nevow:invisible nevow:render="inboxLink" /></nevow:attr>
+    </a>
+    <center>
+      <table cellpadding="0" cellspacing="0" class="compose-table">
+        <tr>
+          <td>
+            <table class="header-table" cellspacing="0">
+              <tbody>
+                <tr valign="center">
+                  <td colspan="2">
+                    <div class="buttons">
+                      <div style="float: right">
+                        <a href="#"
+                          class="cancel-link" style="display: none"
+                          onclick="Quotient.Compose.Controller.get(this).cancel(); return false">
+                          <img src="/static/Quotient/images/close-inline-compose.png" border="0" />
+                        </a>
+                      </div>
+                      <div class="send-save-attach-buttons" style="float: left">
+                        <nevow:invisible nevow:render="button">
+                          <a href="#" onclick="Quotient.Compose.Controller.get(this).submit(); return false;">
+                            Send
+                          </a>
+                        </nevow:invisible>
+                        <span class="draft-button-container">
+                          <nevow:invisible nevow:render="button">
+                            <a href="#" onclick="Quotient.Compose.Controller.get(this).saveDraft(true); return false;">
+                              Save Draft
+                            </a>
+                          </nevow:invisible>
+                        </span>
+                        <nevow:invisible nevow:render="button">
+                          <a href="#" class="more-options-disclose">
+                            <athena:handler event="onclick" handler="toggleMoreOptions" />
+                            <span class="closed-label">More Options...</span>
+                            <span class="open-label" style="display: none">Less Options</span>
+                          </a>
+                        </nevow:invisible>
+                        <nevow:invisible nevow:render="attachButton" />
+                      </div>
+                    </div>
+                    <div style="float: right">
+                      <div class="draft-notification">
+                        <div class="draft-dialog" style="visibility: hidden">I am stretching the height of this node</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="header-table-first-col">From:</td>
+                  <td class="header-table-last-col"><nevow:slot name="from" /></td>
+                </tr>
+                <tr valign="top">
+                  <td class="header-table-first-col">
+                    To:<br />
+                  </td>
+                  <td class="header-table-last-col">
+                    <textarea
+                      name="toAddresses"
+                      class="compose-to-address"
+                      style="width: 98%"
+                      rows="2"><nevow:slot name="to" /></textarea></td>
+                </tr>
+                <nevow:slot name="subject" />
+                <tr class="more-options" style="display: none">
+                  <td class="header-table-first-col">CC:</td>
+                  <td class="header-table-last-col">
+                    <input type="text" name="cc" style="width: 98%" autocomplete="off">
+                      <nevow:attr name="value"><nevow:slot name="cc" /></nevow:attr>
+                    </input>
+                  </td>
+                </tr>
+                <tr class="more-options" style="display: none">
+                  <td class="header-table-first-col">BCC:</td>
+                  <td class="header-table-last-col">
+                    <input type="text" name="bcc" style="width: 98%">
+                      <nevow:attr name="value"><nevow:slot name="bcc" /></nevow:attr>
+                    </input>
+                  </td>
+                </tr>
+                <tr class="files-form" style="display: none">
+                  <td class="header-table-first-col">Files:</td>
+                  <td class="header-table-last-col">
+                    <ul class="file-list">
+                      <nevow:slot name="attachments" />
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <nevow:slot name="message-body" />
+          </td>
+        </tr>
+      </table>
+    </center>
+  </nevow:invisible>
+</div>

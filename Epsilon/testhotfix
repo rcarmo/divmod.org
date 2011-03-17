@@ -1,0 +1,8 @@
+#!/usr/bin/python
+from epsilon import hotfix
+from twisted.python import filepath
+orig_a = filepath.FilePath('a')
+hotfix.require('twisted', 'filepath_copyTo')
+new_a = filepath.FilePath('a')
+print orig_a == new_a
+print orig_a.temporarySibling()

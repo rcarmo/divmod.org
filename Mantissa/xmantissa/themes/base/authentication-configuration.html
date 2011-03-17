@@ -1,0 +1,56 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1" class="authentication-panel"
+    nevow:render="liveFragment">
+  <center>
+    <form onsubmit="Mantissa.Authentication.get(this).submitNewPassword(this); return false;">
+      <table cellspacing="0" class="control-table">
+        <thead>
+          <tr>
+            <td colspan="2">Change Your Password</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr nevow:pattern="current-password">
+            <td>Current Password</td>
+            <td class="control-cell"><input type="password" name="currentPassword" /></td>
+          </tr>
+          <tr nevow:pattern="no-current-password">
+            <td>Current Password</td>
+            <td class="control-cell"><input disabled="disabled" type="password" name="currentPassword" /></td>
+          </tr>
+
+          <nevow:invisible nevow:render="currentPasswordField" />
+          <tr>
+            <td>New Password</td>
+            <td class="control-cell"><input type="password" name="newPassword" /></td>
+          </tr>
+          <tr>
+            <td>Confirm New Password</td>
+            <td class="control-cell"><input type="password" name="confirmPassword" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <input type="submit" value="Change Password" class="change-password" />
+    </form>
+
+    <table cellspacing="0" class="control-table">
+      <thead>
+        <tr>
+          <td colspan="3">Persistent Sessions</td>
+        </tr>
+      </thead>
+      <tbody nevow:render="sequence" nevow:data="persistentSessions">
+        <tr nevow:pattern="item">
+          <td>Last Used</td>
+          <td nevow:render="mapping">
+            <span nevow:data="lastUsed" nevow:render="data" />
+          </td>
+          <td><a href="#" nevow:render="cancel">Discontinue</a></td>
+        </tr>
+        <tr nevow:pattern="empty" align="center">
+          <td colspan="3" style="font-weight: bold">No Sessions</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>

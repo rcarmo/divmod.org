@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/Mantissa/mantissa.css" />
+  </head>
+  <body>
+    <center>
+      <table>
+        <tr>
+          <td>
+            <img>
+              <nevow:attr name="src"><nevow:invisible nevow:render="smallerMugshotURL" /></nevow:attr>
+            </img>
+          </td>
+          <td>
+            <form enctype="multipart/form-data" method="POST" name="mugshot"
+              class="mugshot-form">
+              <input type="file" name="uploaddata" />
+              <input type="submit" name="upload" value="Upload Mugshot" />
+            </form>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>

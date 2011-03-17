@@ -1,0 +1,19 @@
+From: %%(from)s
+To: %%(to)s
+Subject: %(subject)s
+Date: %%(date)s
+Message-ID: %%(message-id)s
+Content-Type: text/html
+Reply-To: %%(from)s
+MIME-Version: 1.0
+
+<html>
+<head>
+<title>%(subject)s</title>
+</head>
+<body>
+<div>%(blurb)s</div>
+<a href="%%(link)s">%(linktext)s</a>
+
+</body>
+</html>

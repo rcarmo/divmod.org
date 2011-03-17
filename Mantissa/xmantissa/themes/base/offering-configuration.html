@@ -1,0 +1,17 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1"
+     xmlns:athena="http://divmod.org/ns/athena/0.7">
+  Offerings
+  <ul nevow:render="offerings">
+    <li nevow:pattern="uninstalled"
+        nevow:render="liveFragment"
+        onclick="Mantissa.Offering.UninstalledOffering.get(this).install(); return false;"
+        class="uninstalled">
+      <nevow:invisible nevow:render="mapping">
+        <nevow:slot name="name" />: <nevow:slot name="description" />
+      </nevow:invisible>
+    </li>
+    <li nevow:pattern="installed" nevow:render="mapping" class="installed">
+      <nevow:slot name="name" />: <nevow:slot name="description" />
+    </li>
+  </ul>
+</div>

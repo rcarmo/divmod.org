@@ -1,0 +1,15 @@
+<div xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+  <tr nevow:pattern="action">
+    <td><nevow:slot name="icon-link" /></td>
+    <td><nevow:slot name="description" /></td>
+  </tr>
+
+  <span nevow:pattern="person" style="font-weight: bold;">
+    <a><nevow:attr name="href"><nevow:slot name="location" /></nevow:attr><nevow:slot name="name" /></a>
+    (<a href="#" onclick="quotient_exposeActions(event); return false">+</a>)
+    <div style="position: absolute; display: none;" class="person-actions">
+      Actions for <nevow:slot name="name" /><p />
+      <table><nevow:slot name="actions" /></table>
+    </div>
+  </span>
+</div>
